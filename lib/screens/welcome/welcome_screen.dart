@@ -1,5 +1,13 @@
+/* 
+* filename: welcome_screen.dart
+* author: Logan Anderson
+* date created: 09/24/22
+* brief: designs the welcome screen (sign in page) 
+*/
+
 import 'package:flutter/material.dart';
 
+//main class for welcome screen
 class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({super.key});
 
@@ -18,29 +26,37 @@ class Body extends StatefulWidget {
   State<Body> createState() => _BodyState();
 }
 
+/*
+* name: _BodyState
+* author: Logan Anderson
+* created: 09/24/22
+* brief: Designs the body of the welcome screen, which includes
+* username and password input boxes, place to create account/login, and
+* game logo.
+*/
 class _BodyState extends State<Body> {
   TextEditingController userController = TextEditingController();
   TextEditingController passController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
+    return Padding(     //Padding widget helps spacing of child widgets
       padding: const EdgeInsets.all(10),
       child: ListView(
         children: <Widget>[
-          Container(
+          Container(    //This is where the logo will be eventually
             alignment: Alignment.center,
             padding: const EdgeInsets.fromLTRB(10, 150, 10, 10),
             child: const Text(
               'Put Campus Battle Logo here',
-              style: TextStyle(
+              style: TextStyle(   //designs the text
                 color: Colors.blue,
                 fontWeight: FontWeight.w500,
                 fontSize: 25,
               ),
             ),
           ),
-          Container(
+          Container(    //widget for sign in text
             alignment: Alignment.center,
             padding: const EdgeInsets.all(10),
             child: const Text(
@@ -48,7 +64,7 @@ class _BodyState extends State<Body> {
               style: TextStyle(fontSize: 20),
             ),
           ),
-          Container(
+          Container(      //widget for username input box
             padding: const EdgeInsets.fromLTRB(40, 10, 40, 10),
             child: TextField(
               controller: userController,
@@ -58,10 +74,10 @@ class _BodyState extends State<Body> {
               ),
             ),
           ),
-          Container(
+          Container(    //widget for password input box
             padding: const EdgeInsets.fromLTRB(40, 10, 40, 0),
             child: TextField(
-              obscureText: true,
+              obscureText: true,    
               controller: passController,
               decoration: const InputDecoration(
                 border: OutlineInputBorder(),
@@ -70,7 +86,7 @@ class _BodyState extends State<Body> {
             ),
           ),
           //Put TextButton for forgot password here?
-          Container(
+          Container(  //widget for create account button
               padding: const EdgeInsets.fromLTRB(0, 0, 155, 0),
               child: TextButton(
                 child: const Text(
@@ -81,7 +97,7 @@ class _BodyState extends State<Body> {
                   //create account screen
                 },
               )),
-          Container(
+          Container(    //widget for Login button
             height: 50,
             padding: const EdgeInsets.fromLTRB(220, 0, 40, 0),
             child: ElevatedButton(
