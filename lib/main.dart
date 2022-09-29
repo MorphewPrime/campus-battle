@@ -6,8 +6,10 @@
 */
 
 import 'package:campusbattle/constants.dart';
+import 'package:campusbattle/screens/game/map_main.dart';
+import 'package:campusbattle/screens/welcome/create_account_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:campusbattle/screens/welcome/welcome_screen.dart';
+import 'package:campusbattle/screens/welcome/login_screen.dart';
 
 //main() runs MyApp which builds the application
 void main() {
@@ -27,7 +29,13 @@ class MyApp extends StatelessWidget {
         primaryColor: cPrimaryColor,
         scaffoldBackgroundColor: const Color(0xFFFFFDE9),   
       ),
-      home: const WelcomeScreen(),     //tells program what screen shows up on app launch
+      //home: const LoginScreen(),     //tells program what screen shows up on app launch
+      initialRoute: '/loginScreen',
+      routes: {
+        '/loginScreen': (context) => const LoginScreen(),
+        '/createAccount': (context) => const CreateAccount(),
+        '/gameMap': (context) => const GameMap(),
+      },
     );
   }
 }
