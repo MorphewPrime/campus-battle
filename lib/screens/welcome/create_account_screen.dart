@@ -1,15 +1,15 @@
 /* 
-* filename: welcome_screen.dart
+* filename: create_account_screen.dart
 * author: Logan Anderson
-* date created: 09/24/22
-* brief: designs the welcome screen (sign in page) 
+* date created: 09/28/22
+* brief: designs the create account screen
 */
 
 import 'package:flutter/material.dart';
 
 //main class for welcome screen
-class WelcomeScreen extends StatelessWidget {
-  const WelcomeScreen({super.key});
+class CreateAccount extends StatelessWidget {
+  const CreateAccount({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -26,14 +26,6 @@ class Body extends StatefulWidget {
   State<Body> createState() => _BodyState();
 }
 
-/*
-* name: _BodyState
-* author: Logan Anderson
-* created: 09/24/22
-* brief: Designs the body of the welcome screen, which includes
-* username and password input boxes, place to create account/login, and
-* game logo.
-*/
 class _BodyState extends State<Body> {
   TextEditingController userController = TextEditingController();
   TextEditingController passController = TextEditingController();
@@ -46,7 +38,7 @@ class _BodyState extends State<Body> {
         children: <Widget>[
           Container(    //This is where the logo will be eventually
             alignment: Alignment.center,
-            padding: const EdgeInsets.fromLTRB(10, 150, 10, 10),
+            padding: const EdgeInsets.fromLTRB(10, 100, 10, 100),
             child: const Text(
               'Put Campus Battle Logo here',
               style: TextStyle(   //designs the text
@@ -56,11 +48,11 @@ class _BodyState extends State<Body> {
               ),
             ),
           ),
-          Container(    //widget for sign in text
+          Container(    //widget for Create Account text
             alignment: Alignment.center,
             padding: const EdgeInsets.all(10),
             child: const Text(
-              'Sign In',
+              'Create Account',
               style: TextStyle(fontSize: 20),
             ),
           ),
@@ -85,30 +77,35 @@ class _BodyState extends State<Body> {
               ),
             ),
           ),
-          //Put TextButton for forgot password here?
           Container(  //widget for create account button
-              padding: const EdgeInsets.fromLTRB(0, 0, 155, 0),
+              padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
               child: TextButton(
                 child: const Text(
-                  'Create Account',
-                  style: TextStyle(fontSize: 20),
+                  'Have Account? Log In',
+                  style: TextStyle(
+                    fontSize: 20,
+                    decoration: TextDecoration.underline,
+                  ),
                 ),
                 onPressed: () {
-                  //create account screen
+                  //go to login screen
+                  Navigator.pushNamed(context, '/loginScreen');
                 },
               )),
-          Container(    //widget for Login button
+          Container(    //widget for Sign Up button
             height: 50,
-            padding: const EdgeInsets.fromLTRB(220, 0, 40, 0),
+            padding: const EdgeInsets.fromLTRB(40, 0, 40, 0),
             child: ElevatedButton(
               onPressed: () {
-                //go through user authentication process
+                //create user account
+                //temporary - just goes to game map
+                Navigator.pushNamed(context, '/gameMap');
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.lightGreen,
                 //height should be same as user and pass height
               ),
-              child: const Text('Login'),
+              child: const Text('Sign Up'),
             ),
           ),
         ],
