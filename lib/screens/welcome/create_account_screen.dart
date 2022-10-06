@@ -7,7 +7,7 @@
 
 import 'package:flutter/material.dart';
 
-//main class for welcome screen
+//main class for create account screen
 class CreateAccount extends StatelessWidget {
   const CreateAccount({super.key});
 
@@ -27,7 +27,7 @@ class Body extends StatefulWidget {
 }
 
 class _BodyState extends State<Body> {
-  TextEditingController userController = TextEditingController();
+  TextEditingController userController = TextEditingController(); //not sure what these do yet
   TextEditingController passController = TextEditingController();
 
   @override
@@ -36,21 +36,19 @@ class _BodyState extends State<Body> {
       padding: const EdgeInsets.all(10),
       child: ListView(
         children: <Widget>[
-          Container(    //This is where the logo will be eventually
+          Container(    //widget for logo
             alignment: Alignment.center,
-            padding: const EdgeInsets.fromLTRB(10, 100, 10, 100),
-            child: const Text(
-              'Put Campus Battle Logo here',
-              style: TextStyle(   //designs the text
-                color: Colors.blue,
-                fontWeight: FontWeight.w500,
-                fontSize: 25,
-              ),
-            ),
+            padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
+            child: Image.asset(
+                'assets/images/campus-battle-logo1.png',
+                semanticLabel: 'Campus Battle Logo',
+                width: 315,
+                fit: BoxFit.contain,
+              )
           ),
           Container(    //widget for Create Account text
             alignment: Alignment.center,
-            padding: const EdgeInsets.all(10),
+            padding: const EdgeInsets.fromLTRB(10, 0, 10, 10),
             child: const Text(
               'Create Account',
               style: TextStyle(fontSize: 20),
@@ -59,7 +57,7 @@ class _BodyState extends State<Body> {
           Container(      //widget for username input box
             padding: const EdgeInsets.fromLTRB(40, 10, 40, 10),
             child: TextField(
-              controller: userController,
+              controller: userController, //not sure what this does yet
               decoration: const InputDecoration(
                 border: OutlineInputBorder(),
                 labelText: 'Username',
@@ -70,7 +68,7 @@ class _BodyState extends State<Body> {
             padding: const EdgeInsets.fromLTRB(40, 10, 40, 0),
             child: TextField(
               obscureText: true,    
-              controller: passController,
+              controller: passController, //not sure what this does yet
               decoration: const InputDecoration(
                 border: OutlineInputBorder(),
                 labelText: 'Password',
