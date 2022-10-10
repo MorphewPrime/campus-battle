@@ -28,6 +28,9 @@ class MyGameMap extends StatefulWidget {
   State<MyGameMap> createState() => _MyGameMapState();
 }
 
+//state of the game map page
+//created by Jackson Morphew
+//revised by Logan Anderson
 class _MyGameMapState extends State<MyGameMap> {
   late GoogleMapController mapController;
 
@@ -46,7 +49,7 @@ class _MyGameMapState extends State<MyGameMap> {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          leading: BackButton(
+          leading: BackButton(    //back button that may be temporary
             onPressed: () {
                 Navigator.pushNamed(context, '/loginScreen');
               },
@@ -63,13 +66,6 @@ class _MyGameMapState extends State<MyGameMap> {
             zoom: 18,
           ),
         ),
-        // floatingActionButton: FloatingActionButton(
-        //   onPressed: () {
-        //         Navigator.pushNamed(context, '/loginScreen');
-        //       },
-        //   tooltip: 'back button',
-        //   child: const Icon(Icons.add),
-        // ),
       ),
     );
   }
