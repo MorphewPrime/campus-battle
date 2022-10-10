@@ -9,7 +9,7 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 
 
-//main class for create account screen
+//main class for welcome screen
 class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({super.key});
 

@@ -37,6 +37,9 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
 
+  # Google Maps feature
+  google_maps_flutter: ^2.2.0
+
   #add flutter svg dependency
   flutter_svg: ^0.17.4
 
@@ -68,6 +71,7 @@ flutter:
   #   - images/a_dot_ham.jpeg
   assets:
     - assets/images/
+    - assets/map_style.json
 
 
   # An image asset can refer to one or more resolution-specific "variants", see
