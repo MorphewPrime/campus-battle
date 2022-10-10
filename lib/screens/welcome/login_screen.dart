@@ -8,7 +8,7 @@
 import 'package:flutter/material.dart';
 
 
-//main class for welcome screen
+//main class for login screen
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
 

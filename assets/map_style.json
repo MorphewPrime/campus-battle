@@ -1,0 +1,91 @@
+[
+    {
+      "featureType": "administrative.land_parcel",
+      "stylers": [
+        {
+          "visibility": "off"
+        }
+      ]
+    },
+    {
+      "featureType": "administrative.neighborhood",
+      "stylers": [
+        {
+          "visibility": "off"
+        }
+      ]
+    },
+    {
+      "featureType": "landscape.man_made",
+      "elementType": "geometry.fill",
+      "stylers": [
+        {
+          "color": "#353f98"
+        }
+      ]
+    },
+    {
+      "featureType": "poi",
+      "elementType": "labels.text",
+      "stylers": [
+        {
+          "visibility": "off"
+        }
+      ]
+    },
+    {
+      "featureType": "poi.school",
+      "elementType": "geometry.fill",
+      "stylers": [
+        {
+          "color": "#ddebf8"
+        }
+      ]
+    },
+    {
+      "featureType": "poi.school",
+      "elementType": "geometry.stroke",
+      "stylers": [
+        {
+          "color": "#004280"
+        }
+      ]
+    },
+    {
+      "featureType": "poi.sports_complex",
+      "elementType": "geometry.fill",
+      "stylers": [
+        {
+          "color": "#88a7dc"
+        }
+      ]
+    },
+    {
+      "featureType": "road",
+      "elementType": "labels",
+      "stylers": [
+        {
+          "visibility": "off"
+        }
+      ]
+    },
+    {
+      "featureType": "road.local",
+      "elementType": "geometry.fill",
+      "stylers": [
+        {
+          "color": "#ffffff"
+        }
+      ]
+    },
+    {
+      "featureType": "water",
+      "elementType": "labels.text",
+      "stylers": [
+        {
+          "visibility": "off"
+        }
+      ]
+    }
+  ]
+  
