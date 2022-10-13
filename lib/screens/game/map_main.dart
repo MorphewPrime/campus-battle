@@ -6,8 +6,8 @@
 */
 
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-
 
 //main class for game map screen
 class GameMap extends StatelessWidget {
@@ -44,20 +44,35 @@ class _MyGameMapState extends State<MyGameMap> {
     mapController.setMapStyle(mapStyle);
   }
 
+  final List<Marker> _markers = <Marker>[];
+
+  // method for getting user current location
+  Future<Position> getUserCurrentLocation() async {
+    await Geolocator.requestPermission()
+        .then((value) {})
+        .onError((error, stackTrace) async {
+      await Geolocator.requestPermission();
+      print("ERROR" + error.toString());
+    });
+    return await Geolocator.getCurrentPosition();
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          leading: BackButton(    //back button that may be temporary
+          leading: BackButton(
+            //back button that may be temporary
             onPressed: () {
-                Navigator.pushNamed(context, '/loginScreen');
-              },
+              Navigator.pushNamed(context, '/loginScreen');
+            },
           ),
           title: const Text('Maps Sample App'),
           backgroundColor: Colors.green[700],
         ),
         body: GoogleMap(
+          markers: Set<Marker>.of(_markers),
           onMapCreated: _onMapCreated,
           rotateGesturesEnabled: false,
           myLocationEnabled: true,
@@ -66,6 +81,25 @@ class _MyGameMapState extends State<MyGameMap> {
             zoom: 18,
           ),
         ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () async {
+            getUserCurrentLocation().then((value) async {
+              print(
+                  value.latitude.toString() + " " + value.longitude.toString());
+
+              // marker added for current users location
+              _markers.add(Marker(
+                markerId: MarkerId("2"),
+                position: LatLng(value.latitude, value.longitude),
+                infoWindow: InfoWindow(
+                  title: 'My Current Location',
+                ),
+              ));
+            });
+          },
+          child: Icon(Icons.local_activity),
+        ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.startFloat,
       ),
     );
   }
