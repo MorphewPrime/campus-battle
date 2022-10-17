@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "576332255051",
+    "project_id": "campus-battle",
+    "storage_bucket": "campus-battle.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:576332255051:android:0aac01653ff93dd475a2ce",
+        "android_client_info": {
+          "package_name": "com.example.campusbattle"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "576332255051-1u73es2bphpqqtkq97d1nnu654n31l3m.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAGlKQJQRWZf_1_OPNyAeX4ZLFr7PL9bZI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "576332255051-1u73es2bphpqqtkq97d1nnu654n31l3m.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "576332255051-a8r28qg0foqnd7qsbjsb9krentfamk9c.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.campusbattle"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -45,6 +45,8 @@ dependencies:
 
   #add flutter svg dependency
   flutter_svg: ^0.17.4
+  firebase_core: ^1.24.0
+  firebase_auth: ^3.11.2
 
 dev_dependencies:
   flutter_test:
