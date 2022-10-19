@@ -32,7 +32,6 @@ dependencies:
   flutter:
     sdk: flutter
 
-
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
@@ -42,6 +41,12 @@ dependencies:
   
   # Access to location based services
   geolocator: ^9.0.2
+
+  # Font Awesome Icons
+  font_awesome_flutter: ^10.2.1
+
+  # Easy to use Toggle switches
+  toggle_switch: ^2.0.1
 
   #add flutter svg dependency
   flutter_svg: ^0.17.4

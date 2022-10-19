@@ -3,11 +3,17 @@
 * author: Logan Anderson/Jackson Morphew
 * date created: 09/28/22
 * brief: main file for the map screen of the game
+
+* modified: 10/19/22
+* By: Jackson Morphew
+* brief: added 3 state toggle switch and 3 buttons to map view.
 */
 
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:toggle_switch/toggle_switch.dart';
 
 //main class for game map screen
 class GameMap extends StatelessWidget {
@@ -35,6 +41,8 @@ class _MyGameMapState extends State<MyGameMap> {
   late GoogleMapController mapController;
 
   final LatLng _center = const LatLng(38.957111, -95.254387);
+  final double toggleWidth = 45.0;
+  final double toggleHeight = 35.0;
 
   void _onMapCreated(GoogleMapController controller) async {
     mapController = controller;
@@ -42,6 +50,20 @@ class _MyGameMapState extends State<MyGameMap> {
     String mapStyle = await DefaultAssetBundle.of(context)
         .loadString('assets/map_style.json');
     mapController.setMapStyle(mapStyle);
+  }
+
+  void _zoomToCurrentLocation() async {
+    // final GoogleMapController controller = await controller.future;
+    getUserCurrentLocation().then((value) async {
+      print(value.latitude.toString() + " " + value.longitude.toString());
+      mapController.animateCamera(CameraUpdate.newCameraPosition(
+        CameraPosition(
+          bearing: 0,
+          target: LatLng(value.latitude, value.longitude),
+          zoom: 18.0,
+        ),
+      ));
+    });
   }
 
   final List<Marker> _markers = <Marker>[];
@@ -75,31 +97,122 @@ class _MyGameMapState extends State<MyGameMap> {
           markers: Set<Marker>.of(_markers),
           onMapCreated: _onMapCreated,
           rotateGesturesEnabled: false,
+          mapToolbarEnabled: false,
+          zoomControlsEnabled: false,
+          compassEnabled: false,
+          myLocationButtonEnabled: false,
           myLocationEnabled: true,
           initialCameraPosition: CameraPosition(
             target: _center,
             zoom: 18,
           ),
         ),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () async {
-            getUserCurrentLocation().then((value) async {
-              print(
-                  value.latitude.toString() + " " + value.longitude.toString());
-
-              // marker added for current users location
-              _markers.add(Marker(
-                markerId: MarkerId("2"),
-                position: LatLng(value.latitude, value.longitude),
-                infoWindow: InfoWindow(
-                  title: 'My Current Location',
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+        floatingActionButton: Stack(
+          children: <Widget>[
+            Padding(
+              padding: EdgeInsets.only(
+                  top: AppBar().preferredSize.height + 45, left: 10),
+              child: Align(
+                alignment: Alignment.topLeft,
+                child: FloatingActionButton(
+                  onPressed: () async {
+                    Navigator.pushNamed(context, '/loginScreen'); // for testing
+                  },
+                  child: Icon(FontAwesomeIcons.plus),
                 ),
-              ));
-            });
-          },
-          child: Icon(Icons.local_activity),
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.only(
+                  top: AppBar().preferredSize.height + 45, right: 10),
+              child: Align(
+                alignment: Alignment.topRight,
+                child: Column(
+                  // mainAxisAlignment: MainAxisAlignment.right,
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: <Widget>[
+                    ToggleSwitch(
+                      minWidth: toggleWidth,
+                      minHeight: toggleHeight,
+                      initialLabelIndex: 2,
+                      cornerRadius: 20.0,
+                      activeFgColor: Colors.white,
+                      inactiveBgColor: Colors.grey,
+                      inactiveFgColor: Colors.white,
+                      totalSwitches: 3,
+                      icons: [
+                        FontAwesomeIcons.feather,
+                        FontAwesomeIcons.circleDot,
+                        FontAwesomeIcons.binoculars,
+                      ],
+                      iconSize: 30.0,
+                      borderWidth: 2.0,
+                      borderColor: [Colors.blueGrey],
+                      activeBgColors: [
+                        [Colors.redAccent],
+                        [Colors.green],
+                        [Colors.blueAccent]
+                      ],
+                      onToggle: (index) {
+                        print('switched to: $index');
+                      },
+                    ),
+                    FloatingActionButton(
+                      onPressed: _zoomToCurrentLocation,
+                      child: Icon(FontAwesomeIcons.locationCrosshairs),
+                    )
+                  ],
+                ),
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.only(left: 10),
+              child: Align(
+                alignment: Alignment.bottomLeft,
+                child: FloatingActionButton(
+                  onPressed: () async {
+                    getUserCurrentLocation().then((value) async {
+                      print(value.latitude.toString() +
+                          " " +
+                          value.longitude.toString());
+
+                      // marker added for current users location
+                      setState(() {
+                        _markers.add(Marker(
+                          markerId: MarkerId("2"),
+                          position: LatLng(value.latitude, value.longitude),
+                          infoWindow: InfoWindow(
+                            title: 'My Current Location',
+                          ),
+                        ));
+                      }); // setState
+
+                      // _markers.add(Marker(
+                      //   markerId: MarkerId("2"),
+                      //   position: LatLng(value.latitude, value.longitude),
+                      //   infoWindow: InfoWindow(
+                      //     title: 'My Current Location',
+                      //   ),
+                      // ));
+                    });
+                  },
+                  child: Icon(FontAwesomeIcons.userLarge),
+                ),
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.only(right: 10),
+              child: Align(
+                alignment: Alignment.bottomRight,
+                child: FloatingActionButton(
+                  onPressed: _zoomToCurrentLocation,
+                  child: Icon(FontAwesomeIcons.bagShopping),
+                ),
+              ),
+            ),
+          ],
         ),
-        floatingActionButtonLocation: FloatingActionButtonLocation.startFloat,
       ),
     );
   }
