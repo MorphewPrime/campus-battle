@@ -39,6 +39,7 @@ class MyGameMap extends StatefulWidget {
 //revised by Logan Anderson
 class _MyGameMapState extends State<MyGameMap> {
   late GoogleMapController mapController;
+  late BitmapDescriptor pinLocationIcon;
 
   final LatLng _center = const LatLng(38.957111, -95.254387);
   final double toggleWidth = 45.0;
@@ -80,6 +81,20 @@ class _MyGameMapState extends State<MyGameMap> {
   }
 
   @override
+  void initState() {
+    setIcons();
+  }
+
+  void setIcons() {
+    BitmapDescriptor.fromAssetImage(ImageConfiguration(size: Size(2.0, 2.0)),
+            'assets/images/icon_test_128.png')
+        .then((onValue) {
+      setState((() {
+        pinLocationIcon = onValue;
+      }));
+    });
+  }
+
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
@@ -182,19 +197,12 @@ class _MyGameMapState extends State<MyGameMap> {
                         _markers.add(Marker(
                           markerId: MarkerId("2"),
                           position: LatLng(value.latitude, value.longitude),
+                          icon: pinLocationIcon,
                           infoWindow: InfoWindow(
                             title: 'My Current Location',
                           ),
                         ));
                       }); // setState
-
-                      // _markers.add(Marker(
-                      //   markerId: MarkerId("2"),
-                      //   position: LatLng(value.latitude, value.longitude),
-                      //   infoWindow: InfoWindow(
-                      //     title: 'My Current Location',
-                      //   ),
-                      // ));
                     });
                   },
                   child: Icon(FontAwesomeIcons.userLarge),
