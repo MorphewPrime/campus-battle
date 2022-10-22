@@ -44,6 +44,7 @@ class _MyGameMapState extends State<MyGameMap> {
   final LatLng _center = const LatLng(38.957111, -95.254387);
   final double toggleWidth = 45.0;
   final double toggleHeight = 35.0;
+  int initialToggleIndex = 2;
 
   void _onMapCreated(GoogleMapController controller) async {
     mapController = controller;
@@ -141,6 +142,21 @@ class _MyGameMapState extends State<MyGameMap> {
     _markers = _tour_markers + _game_markers;
   }
 
+  void filterMarkers(index) {
+    List<Marker> temp;
+    if (index == 0) {
+      temp = _game_markers;
+    } else if (index == 2) {
+      temp = _tour_markers;
+    } else {
+      temp = _game_markers + _tour_markers;
+    }
+    setState(() {
+      _markers = temp;
+      initialToggleIndex = index;
+    });
+  }
+
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
@@ -196,7 +212,7 @@ class _MyGameMapState extends State<MyGameMap> {
                     ToggleSwitch(
                       minWidth: toggleWidth,
                       minHeight: toggleHeight,
-                      initialLabelIndex: 2,
+                      initialLabelIndex: initialToggleIndex,
                       cornerRadius: 20.0,
                       activeFgColor: Colors.white,
                       inactiveBgColor: Colors.grey,
@@ -215,8 +231,10 @@ class _MyGameMapState extends State<MyGameMap> {
                         [Colors.green],
                         [Colors.blueAccent]
                       ],
+                      // changeOnTap: true,
                       onToggle: (index) {
                         print('switched to: $index');
+                        filterMarkers(index);
                       },
                     ),
                     FloatingActionButton(
