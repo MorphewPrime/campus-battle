@@ -67,7 +67,10 @@ class _MyGameMapState extends State<MyGameMap> {
     });
   }
 
-  final List<Marker> _markers = <Marker>[];
+  final List<Marker> _tour_markers = <Marker>[];
+  final List<Marker> _game_markers = <Marker>[];
+
+  List<Marker> _markers = <Marker>[];
 
   // method for getting user current location
   Future<Position> getUserCurrentLocation() async {
@@ -82,10 +85,12 @@ class _MyGameMapState extends State<MyGameMap> {
 
   @override
   void initState() {
-    setIcons();
+    setIcons().then((onValue) {
+      initialPinTests(); // temp funtion to test setting pins initially. eventually DB will populate.
+    });
   }
 
-  void setIcons() {
+  Future<void> setIcons() async {
     BitmapDescriptor.fromAssetImage(ImageConfiguration(size: Size(2.0, 2.0)),
             'assets/images/icon_test_128.png')
         .then((onValue) {
@@ -93,6 +98,47 @@ class _MyGameMapState extends State<MyGameMap> {
         pinLocationIcon = onValue;
       }));
     });
+  }
+
+  void initialPinTests() {
+    _game_markers.add(Marker(
+      markerId: MarkerId("0"),
+      position: LatLng(38.957111, -95.254397),
+      icon: pinLocationIcon,
+      infoWindow: InfoWindow(
+        title: 'My Current Location',
+      ),
+      // onTap: () {
+      //   Navigator.pushNamed(context, '/tourView');
+      // },
+    ));
+
+    _tour_markers.addAll([
+      Marker(
+        markerId: MarkerId("1"),
+        position: LatLng(38.957115, -95.254360),
+        // icon: pinLocationIcon,
+        // infoWindow: InfoWindow(
+        //   title: 'My Current Location',
+        // ),
+        onTap: () {
+          Navigator.pushNamed(context, '/tourView');
+        },
+      ),
+      Marker(
+        markerId: MarkerId("2"),
+        position: LatLng(38.957119, -95.254319),
+        // icon: pinLocationIcon,
+        // infoWindow: InfoWindow(
+        //   title: 'My Current Location',
+        // ),
+        onTap: () {
+          Navigator.pushNamed(context, '/tourView');
+        },
+      ),
+    ]);
+
+    _markers = _tour_markers + _game_markers;
   }
 
   Widget build(BuildContext context) {
@@ -194,14 +240,59 @@ class _MyGameMapState extends State<MyGameMap> {
 
                       // marker added for current users location
                       setState(() {
-                        _markers.add(Marker(
-                          markerId: MarkerId("2"),
+                        _game_markers.add(Marker(
+                          markerId: MarkerId(value.latitude.toString()),
                           position: LatLng(value.latitude, value.longitude),
                           icon: pinLocationIcon,
                           infoWindow: InfoWindow(
                             title: 'My Current Location',
                           ),
+                          // onTap: () {
+                          //   Navigator.pushNamed(context, '/tourView');
+                          // },
                         ));
+
+                        // _tour_markers.addAll([
+                        //   Marker(
+                        //     markerId: MarkerId("2"),
+                        //     position: LatLng(38.957115, -95.254390),
+                        //     // icon: pinLocationIcon,
+                        //     // infoWindow: InfoWindow(
+                        //     //   title: 'My Current Location',
+                        //     // ),
+                        //     onTap: () {
+                        //       Navigator.pushNamed(context, '/tourView');
+                        //     },
+                        //   ),
+                        //   Marker(
+                        //     markerId: MarkerId("2"),
+                        //     position: LatLng(38.957115, -95.254390),
+                        //     // icon: pinLocationIcon,
+                        //     // infoWindow: InfoWindow(
+                        //     //   title: 'My Current Location',
+                        //     // ),
+                        //     onTap: () {
+                        //       Navigator.pushNamed(context, '/tourView');
+                        //     },
+                        //   ),
+                        // ]);
+
+                        _markers += _game_markers;
+                        // _markers = _markers +
+                        //     [
+                        //       Marker(
+                        //         markerId: MarkerId(value.latitude.toString()),
+                        //         position:
+                        //             LatLng(value.latitude, value.longitude),
+                        //         icon: pinLocationIcon,
+                        //         // infoWindow: InfoWindow(
+                        //         //   title: 'My Current Location',
+                        //         // ),
+                        //         onTap: () {
+                        //           Navigator.pushNamed(context, '/tourView');
+                        //         },
+                        //       )
+                        //     ];
                       }); // setState
                     });
                   },
