@@ -11,6 +11,7 @@
 
 import 'package:campusbattle/constants.dart';
 import 'package:campusbattle/screens/game/map_main.dart';
+import 'package:campusbattle/screens/tour/tour_panorama.dart';
 import 'package:campusbattle/screens/welcome/create_account_screen.dart';
 import 'package:campusbattle/screens/welcome/welcome_screen.dart';
 import 'package:flutter/material.dart';
@@ -52,6 +53,7 @@ class MyApp extends StatelessWidget {
         '/loginScreen': (context) => const LoginScreen(),
         '/createAccount': (context) => const CreateAccount(),
         '/gameMap': (context) => const GameMap(),
+        '/tourView': (context) => const TourPanorama(),
       },
     );
   }
