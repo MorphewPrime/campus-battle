@@ -139,7 +139,17 @@ class _MyGameMapState extends State<MyGameMap> {
       ),
     ]);
 
-    _markers = _tour_markers + _game_markers;
+    _game_markers.addAll([
+      Marker(
+        markerId: MarkerId("Dragon"),
+        position: LatLng(38.95791, -95.25358),
+        onTap: () {
+          Navigator.pushNamed(context, "/dragon");
+        },
+      )
+    ]);
+
+    _markers = _tour_markers + _game_markers + _game_markers;
   }
 
   void filterMarkers(index) {

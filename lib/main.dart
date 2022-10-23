@@ -10,6 +10,7 @@
 */
 
 import 'package:campusbattle/constants.dart';
+import 'package:campusbattle/screens/game/dragon.dart';
 import 'package:campusbattle/screens/game/map_main.dart';
 import 'package:campusbattle/screens/tour/tour_panorama.dart';
 import 'package:campusbattle/screens/welcome/create_account_screen.dart';
@@ -18,6 +19,7 @@ import 'package:flutter/material.dart';
 import 'package:campusbattle/screens/welcome/login_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
+import 'package:flame/game.dart';
 
 //main() runs MyApp which builds the application
 void main() async {
@@ -54,6 +56,7 @@ class MyApp extends StatelessWidget {
         '/createAccount': (context) => const CreateAccount(),
         '/gameMap': (context) => const GameMap(),
         '/tourView': (context) => const TourPanorama(),
+        '/dragon': (context) => const DragonW(),
       },
     );
   }
