@@ -50,6 +50,9 @@ dependencies:
 
   # Adds 360 image viewing capabilities.
   panorama: ^0.4.1
+ 
+  # Adds simple animation containers
+  sprung: ^3.0.1
 
   #add flutter svg dependency
   flutter_svg: ^0.17.4

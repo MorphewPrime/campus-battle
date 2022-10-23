@@ -18,6 +18,7 @@ import 'package:campusbattle/screens/welcome/welcome_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:campusbattle/screens/welcome/login_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/services.dart';
 import 'firebase_options.dart';
 import 'package:flame/game.dart';
 
@@ -28,6 +29,10 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+
+  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+      statusBarColor: Color(0xffe8000d),
+      systemNavigationBarDividerColor: Color(0xffffc82d)));
 
   // build the app
   runApp(MyApp());
