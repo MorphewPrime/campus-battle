@@ -161,13 +161,7 @@ class _MyGameMapState extends State<MyGameMap> {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          leading: BackButton(
-            //back button that may be temporary
-            onPressed: () {
-              Navigator.pushNamed(context, '/loginScreen');
-            },
-          ),
-          title: const Text('Maps Sample App'),
+          title: const Text('Game Screen'),
           backgroundColor: Colors.green[700],
         ),
         body: GoogleMap(
@@ -189,17 +183,34 @@ class _MyGameMapState extends State<MyGameMap> {
           children: <Widget>[
             Padding(
               padding: EdgeInsets.only(
-                  top: AppBar().preferredSize.height + 45, left: 10),
+                  top: AppBar().preferredSize.height + 85, left: 10),
               child: Align(
                 alignment: Alignment.topLeft,
                 child: FloatingActionButton(
                   onPressed: () async {
                     Navigator.pushNamed(context, '/loginScreen'); // for testing
                   },
-                  child: Icon(FontAwesomeIcons.plus),
+                  child: const Icon(FontAwesomeIcons.plus),
                 ),
               ),
             ),
+
+            //START
+            //for testing battle screen - will be removed
+            Padding(
+              padding: const EdgeInsets.only(right: 10),
+              child: Align(
+                alignment: Alignment.centerRight,
+                child: FloatingActionButton(
+                  onPressed: () async {
+                    Navigator.pushNamed(context, '/battle1'); 
+                  },
+                  child: const Icon(FontAwesomeIcons.boltLightning),
+                ),
+              ),
+            ),
+            //END
+
             Padding(
               padding: EdgeInsets.only(
                   top: AppBar().preferredSize.height + 45, right: 10),

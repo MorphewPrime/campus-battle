@@ -14,9 +14,11 @@ import 'package:campusbattle/screens/game/map_main.dart';
 import 'package:campusbattle/screens/tour/tour_panorama.dart';
 import 'package:campusbattle/screens/welcome/create_account_screen.dart';
 import 'package:campusbattle/screens/welcome/welcome_screen.dart';
+import 'package:campusbattle/screens/game/enemy_battle_1.dart';
 import 'package:flutter/material.dart';
 import 'package:campusbattle/screens/welcome/login_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
+
 import 'firebase_options.dart';
 
 //main() runs MyApp which builds the application
@@ -54,6 +56,7 @@ class MyApp extends StatelessWidget {
         '/createAccount': (context) => const CreateAccount(),
         '/gameMap': (context) => const GameMap(),
         '/tourView': (context) => const TourPanorama(),
+        '/battle1': (context) => EnemyBattle1(),
       },
     );
   }
