@@ -140,14 +140,11 @@ class _BodyState extends State<Body> {
               alignment: Alignment.bottomLeft,
               child: FractionallySizedBox(
                 heightFactor: 0.5,
-                // alignment: Alignment.bottomCenter,
                 child: AnimatedContainer(
-                  // color: Colors.white,
                   curve: Sprung.underDamped,
                   duration: Duration(milliseconds: 750),
                   alignment:
                       infoWindowOpen ? Alignment.topCenter : Alignment(0, 2),
-                  // margin: EdgeInsets.symmetric(vertical: 50),
                   child: Container(
                     height: 100,
                     margin: EdgeInsets.symmetric(horizontal: 10),
@@ -159,7 +156,7 @@ class _BodyState extends State<Body> {
                     ),
                     constraints: BoxConstraints.expand(),
                     child: Padding(
-                      padding: EdgeInsets.all(20),
+                      padding: EdgeInsets.only(top: 20, left: 20, right: 20),
                       child: SingleChildScrollView(
                         child: Column(
                             crossAxisAlignment: CrossAxisAlignment.stretch,

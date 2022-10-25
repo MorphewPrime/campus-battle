@@ -148,6 +148,21 @@ class _BodyState extends State<Body> {
               child: const Text('Login'),
             ),
           ),
+          Container(
+            //widget for Login button
+            height: 50,
+            padding: const EdgeInsets.fromLTRB(40, 10, 40, 0),
+            child: ElevatedButton(
+              onPressed: (() {
+                Navigator.pushNamed(context, '/gameMap');
+              }), // call the signIn function on submit
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.red[900],
+                //height should be same as user and pass height
+              ),
+              child: const Text('SKIP LOGIN >:)'),
+            ),
+          ),
         ],
       ),
     );
