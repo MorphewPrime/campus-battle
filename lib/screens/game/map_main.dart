@@ -151,6 +151,7 @@ class _MyGameMapState extends State<MyGameMap> {
       Marker(
         markerId: MarkerId("Dragon"),
         position: LatLng(38.95791, -95.25358),
+        icon: pinLocationIcon,
         onTap: () {
           Navigator.pushNamed(context, "/dragon");
         },
