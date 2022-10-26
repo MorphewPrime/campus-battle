@@ -74,8 +74,19 @@ class _MyGameMapState extends State<MyGameMap> {
 
   final List<Marker> _tour_markers = <Marker>[];
   final List<Marker> _game_markers = <Marker>[];
+  final List<Circle> _game_circles = <Circle>[];
+  final List<Polygon> _game_polygons = <Polygon>[];
 
   List<Marker> _markers = <Marker>[];
+  List<Circle> _circles = <Circle>[];
+  List<Polygon> _polygons = <Polygon>[];
+
+  List<LatLng> eng_points = [
+    LatLng(38.958443842713194, -95.25499396950453),
+    LatLng(38.957098806254166, -95.25498218000577),
+    LatLng(38.95712717950423, -95.25219515938127),
+    LatLng(38.95847971505341, -95.25226494148477),
+  ];
 
   // method for getting user current location
   Future<Position> getUserCurrentLocation() async {
@@ -106,6 +117,36 @@ class _MyGameMapState extends State<MyGameMap> {
   }
 
   void initialPinTests() {
+    // polygons here for now
+    _game_polygons.addAll([
+      Polygon(
+        polygonId: PolygonId("p1"),
+        points: eng_points,
+        strokeWidth: 2,
+        strokeColor: Colors.black,
+        fillColor: Colors.black.withOpacity(0.05),
+      ),
+    ]);
+    // circles here for now
+    _game_circles.addAll([
+      Circle(
+        circleId: CircleId("c1"),
+        center: LatLng(38.95775992604587, -95.25366028493514),
+        radius: 20,
+        strokeWidth: 2,
+        strokeColor: Colors.purple,
+        fillColor: Colors.purple.withOpacity(0.10),
+      ),
+      Circle(
+        circleId: CircleId("hello"),
+        center: LatLng(38.95769192604987, -95.25396028413514),
+        radius: 20,
+        strokeWidth: 2,
+        strokeColor: Colors.purple,
+        fillColor: Colors.purple.withOpacity(0.10),
+      ),
+    ]);
+
     _game_markers.addAll([
       Marker(
         markerId: MarkerId("Dragon"),
@@ -150,16 +191,24 @@ class _MyGameMapState extends State<MyGameMap> {
   }
 
   void filterMarkers(index) {
-    List<Marker> temp;
+    List<Marker> temp_marker = [];
+    List<Circle> temp_circle = [];
+    List<Polygon> temp_polygon = [];
     if (index == 0) {
-      temp = _game_markers;
+      temp_marker = _game_markers;
+      temp_circle = _game_circles;
+      temp_polygon = _game_polygons;
     } else if (index == 2) {
-      temp = _tour_markers;
+      temp_marker = _tour_markers;
     } else {
-      temp = _game_markers + _tour_markers;
+      temp_marker = _game_markers + _tour_markers;
+      temp_circle = _game_circles;
+      temp_polygon = _game_polygons;
     }
     setState(() {
-      _markers = temp;
+      _markers = temp_marker;
+      _circles = temp_circle;
+      _polygons = temp_polygon;
       initialToggleIndex = index;
     });
   }
@@ -180,6 +229,8 @@ class _MyGameMapState extends State<MyGameMap> {
           ),
           body: GoogleMap(
             markers: Set<Marker>.of(_markers),
+            circles: Set<Circle>.of(_circles),
+            polygons: Set<Polygon>.of(_polygons),
             onMapCreated: _onMapCreated,
             rotateGesturesEnabled: false,
             mapToolbarEnabled: false,
