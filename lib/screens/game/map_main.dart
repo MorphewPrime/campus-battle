@@ -122,7 +122,7 @@ class _MyGameMapState extends State<MyGameMap> {
       Polygon(
         polygonId: PolygonId("p1"),
         points: eng_points,
-        strokeWidth: 2,
+        strokeWidth: 1,
         strokeColor: Colors.black,
         fillColor: Colors.black.withOpacity(0.05),
       ),
@@ -157,7 +157,7 @@ class _MyGameMapState extends State<MyGameMap> {
       ),
       Marker(
         markerId: MarkerId("0"),
-        position: LatLng(38.957111, -95.254397),
+        position: LatLng(38.95740934721012, -95.25396526603686),
         icon: pinLocationIcon,
         infoWindow: InfoWindow(
           title: 'My Current Location',
@@ -171,7 +171,7 @@ class _MyGameMapState extends State<MyGameMap> {
     _tour_markers.addAll([
       Marker(
         markerId: MarkerId("1"),
-        position: LatLng(38.957115, -95.254360),
+        position: LatLng(38.957748500041866, -95.25377502156772),
         // icon: pinLocationIcon,
         onTap: () {
           Navigator.pushNamed(context, '/tourView');
@@ -179,7 +179,7 @@ class _MyGameMapState extends State<MyGameMap> {
       ),
       Marker(
         markerId: MarkerId("2"),
-        position: LatLng(38.957119, -95.254319),
+        position: LatLng(38.957514603816435, -95.25270779228276),
         // icon: pinLocationIcon,
         onTap: () {
           Navigator.pushNamed(context, '/tourView');
@@ -188,6 +188,8 @@ class _MyGameMapState extends State<MyGameMap> {
     ]);
 
     _markers = _tour_markers + _game_markers;
+    _circles = _game_circles;
+    _polygons = _game_polygons;
   }
 
   void filterMarkers(index) {
