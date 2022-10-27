@@ -38,14 +38,14 @@ class _BodyState extends State<Body> {
   bool infoWindowOpen = false;
 
   List<Image> panoImages = [
-    Image.asset('assets/images/panoramas/test_pan.jpeg'),
+    Image.asset('assets/images/panoramas/PANO_test.jpg'),
   ];
 
   void onViewChanged(longitude, latitude, tilt) {
     setState(() {
-      _lon = longitude * 25;
-      _lat = latitude * 25;
-      _tilt = tilt * 25;
+      _lon = longitude;
+      _lat = latitude;
+      _tilt = tilt;
     });
   }
 
@@ -103,7 +103,7 @@ class _BodyState extends State<Body> {
                 print('onLongPressMoveUpdate: $longitude, $latitude, $tilt'),
             onLongPressEnd: (longitude, latitude, tilt) =>
                 print('onLongPressEnd: $longitude, $latitude, $tilt'),
-            child: Image.asset('assets/images/panoramas/test_pan.jpeg'),
+            child: Image.asset('assets/images/panoramas/PANO_test.jpg'),
             hotspots: [
               Hotspot(
                 latitude: -15.0,

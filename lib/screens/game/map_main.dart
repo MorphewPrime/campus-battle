@@ -43,9 +43,10 @@ class MyGameMap extends StatefulWidget {
 //revised by Logan Anderson
 class _MyGameMapState extends State<MyGameMap> {
   late GoogleMapController mapController;
-  late BitmapDescriptor pinLocationIcon;
+  late BitmapDescriptor firePinIcon;
+  late BitmapDescriptor tourPinIcon;
 
-  final LatLng _center = const LatLng(38.957111, -95.254387);
+  final LatLng _center = const LatLng(38.95753752147627, -95.25334374853665);
   final double toggleWidth = 45.0;
   final double toggleHeight = 35.0;
   int initialToggleIndex = 1;
@@ -111,7 +112,15 @@ class _MyGameMapState extends State<MyGameMap> {
             'assets/images/icon_test_128.png')
         .then((onValue) {
       setState((() {
-        pinLocationIcon = onValue;
+        firePinIcon = onValue;
+      }));
+    });
+
+    BitmapDescriptor.fromAssetImage(ImageConfiguration(size: Size(2.0, 2.0)),
+            'assets/images/tour_icon_test_128.png')
+        .then((onValue) {
+      setState((() {
+        tourPinIcon = onValue;
       }));
     });
   }
@@ -151,7 +160,7 @@ class _MyGameMapState extends State<MyGameMap> {
       Marker(
         markerId: MarkerId("Dragon"),
         position: LatLng(38.95791, -95.25358),
-        icon: pinLocationIcon,
+        icon: firePinIcon,
         onTap: () {
           Navigator.pushNamed(context, "/dragon");
         },
@@ -159,7 +168,7 @@ class _MyGameMapState extends State<MyGameMap> {
       Marker(
         markerId: MarkerId("0"),
         position: LatLng(38.95740934721012, -95.25396526603686),
-        icon: pinLocationIcon,
+        icon: firePinIcon,
         infoWindow: InfoWindow(
           title: 'My Current Location',
         ),
@@ -173,7 +182,7 @@ class _MyGameMapState extends State<MyGameMap> {
       Marker(
         markerId: MarkerId("1"),
         position: LatLng(38.957748500041866, -95.25377502156772),
-        // icon: pinLocationIcon,
+        icon: tourPinIcon,
         onTap: () {
           Navigator.pushNamed(context, '/tourView');
         },
@@ -181,7 +190,7 @@ class _MyGameMapState extends State<MyGameMap> {
       Marker(
         markerId: MarkerId("2"),
         position: LatLng(38.957514603816435, -95.25270779228276),
-        // icon: pinLocationIcon,
+        icon: tourPinIcon,
         onTap: () {
           Navigator.pushNamed(context, '/tourView');
         },
@@ -328,7 +337,7 @@ class _MyGameMapState extends State<MyGameMap> {
                           _game_markers.add(Marker(
                             markerId: MarkerId(value.latitude.toString()),
                             position: LatLng(value.latitude, value.longitude),
-                            icon: pinLocationIcon,
+                            icon: firePinIcon,
                             infoWindow: InfoWindow(
                               title: 'My Current Location',
                             ),
@@ -341,7 +350,7 @@ class _MyGameMapState extends State<MyGameMap> {
                           //   Marker(
                           //     markerId: MarkerId("2"),
                           //     position: LatLng(38.957115, -95.254390),
-                          //     // icon: pinLocationIcon,
+                          //     // icon: firePinIcon,
                           //     // infoWindow: InfoWindow(
                           //     //   title: 'My Current Location',
                           //     // ),
@@ -352,7 +361,7 @@ class _MyGameMapState extends State<MyGameMap> {
                           //   Marker(
                           //     markerId: MarkerId("2"),
                           //     position: LatLng(38.957115, -95.254390),
-                          //     // icon: pinLocationIcon,
+                          //     // icon: firePinIcon,
                           //     // infoWindow: InfoWindow(
                           //     //   title: 'My Current Location',
                           //     // ),
@@ -369,7 +378,7 @@ class _MyGameMapState extends State<MyGameMap> {
                           //         markerId: MarkerId(value.latitude.toString()),
                           //         position:
                           //             LatLng(value.latitude, value.longitude),
-                          //         icon: pinLocationIcon,
+                          //         icon: firePinIcon,
                           //         // infoWindow: InfoWindow(
                           //         //   title: 'My Current Location',
                           //         // ),
