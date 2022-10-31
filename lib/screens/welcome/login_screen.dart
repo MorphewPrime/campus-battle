@@ -53,10 +53,18 @@ class _BodyState extends State<Body> {
                   send user to next Screen
   */
   Future signIn() async {
-    await FirebaseAuth.instance.signInWithEmailAndPassword(
-        email: _emailController.text.trim(),
-        password: _passController.text.trim());
-    Navigator.pushNamed(context, '/gameMap');
+    try {
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
+          email: _emailController.text.trim(),
+          password: _passController.text.trim());
+      Navigator.pushNamed(context, '/gameMap');
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'wrong-password') {
+        print('wrong password');
+      } else if (e.code == 'user-not-found') {
+        print('no user found');
+      }
+    }
   }
 
   // dispose of objects in the username/pwd textfields
@@ -101,7 +109,7 @@ class _BodyState extends State<Body> {
                   _emailController, // connect the email controller to acess the user's input
               decoration: const InputDecoration(
                 border: OutlineInputBorder(),
-                labelText: 'Username',
+                labelText: 'email',
               ),
             ),
           ),

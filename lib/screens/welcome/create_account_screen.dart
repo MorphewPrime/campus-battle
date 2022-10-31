@@ -94,7 +94,7 @@ class _BodyState extends State<Body> {
                   _emailController, // connect the email controller to acess the user's input
               decoration: const InputDecoration(
                 border: OutlineInputBorder(),
-                labelText: 'Username',
+                labelText: 'email',
               ),
             ),
           ),
