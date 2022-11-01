@@ -59,11 +59,12 @@ class _BodyState extends State<Body> {
           password: _passController.text.trim());
       Navigator.pushNamed(context, '/gameMap');
     } on FirebaseAuthException catch (e) {
-      if (e.code == 'wrong-password') {
-        print('wrong password');
-      } else if (e.code == 'user-not-found') {
-        print('no user found');
-      }
+      var message = e.code;
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+            content: Text(message),
+            backgroundColor: Theme.of(context).errorColor),
+      );
     }
   }
 

@@ -46,10 +46,19 @@ class _BodyState extends State<Body> {
                   send user to Login Screen
   */
   Future createUser() async {
-    await FirebaseAuth.instance.createUserWithEmailAndPassword(
-        email: _emailController.text.trim(),
-        password: _passController.text.trim());
-    Navigator.pushNamed(context, '/loginScreen');
+    try {
+      await FirebaseAuth.instance.createUserWithEmailAndPassword(
+          email: _emailController.text.trim(),
+          password: _passController.text.trim());
+      Navigator.pushNamed(context, '/loginScreen');
+    } on FirebaseAuthException catch (e) {
+      var message = e.code;
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+            content: Text(message),
+            backgroundColor: Theme.of(context).errorColor),
+      );
+    }
   }
 
   // dispose of objects in the username/pwd textfields
