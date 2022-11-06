@@ -11,7 +11,9 @@
 
 import 'package:campusbattle/constants.dart';
 import 'package:campusbattle/screens/game/dragon.dart';
+import 'package:campusbattle/screens/game/inventory_screen.dart';
 import 'package:campusbattle/screens/game/map_main.dart';
+import 'package:campusbattle/screens/game/minigame_1_screen.dart';
 import 'package:campusbattle/screens/tour/tour_panorama.dart';
 import 'package:campusbattle/screens/welcome/create_account_screen.dart';
 import 'package:campusbattle/screens/welcome/welcome_screen.dart';
@@ -62,6 +64,8 @@ class MyApp extends StatelessWidget {
         '/gameMap': (context) => const GameMap(),
         '/tourView': (context) => const TourPanorama(),
         '/dragon': (context) => const DragonW(),
+        '/inventory': (context) => const InventoryScreen(),
+        '/minigame1': (context) => const EnemyBattle1(),
       },
     );
   }
