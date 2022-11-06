@@ -3,8 +3,40 @@ import 'package:flame/components.dart';
 import 'package:flame/game.dart';
 import 'package:flame/input.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'items.dart';
+import '../../main.dart';
 
 // Game skeleton file
+int items = 1;
+
+// Button to end game
+class Back extends PositionComponent with Tappable {
+  static final _paint = Paint()..color = Colors.orange;
+  late BuildContext c;
+  Back(BuildContext con) {
+    c = con;
+  }
+
+  // Pressable button
+  @override
+  bool onTapDown(TapDownInfo info) {
+    //Navigator.pushNamed(c, "/gameMap");
+    //Navigator.pop(c);
+    //SystemNavigator.pop();
+
+    // Returns to old app, need to add a status to the return so it knows
+    // what's going on
+    runApp(MyApp2(1));
+    return true;
+  }
+
+  // print to screen
+  @override
+  void render(Canvas canvas) {
+    canvas.drawRect(size.toRect(), _paint);
+  }
+}
 
 // Class details a hazard, replace with spritecomponent once we have sprites
 class Danger extends PositionComponent with CollisionCallbacks {
@@ -34,7 +66,16 @@ class Danger extends PositionComponent with CollisionCallbacks {
 
 // this class is the player, update to spritecomponent when we have a sprite
 class Player extends PositionComponent with CollisionCallbacks {
-  static final _paint = Paint()..color = Colors.white;
+  int items = 0;
+  late final _paint;
+  Player(int i) {
+    items = i;
+    if (items == 1) {
+      _paint = Paint()..color = Colors.blue;
+    } else {
+      _paint = Paint()..color = Colors.white;
+    }
+  }
 
   int hp = 100;
 
@@ -82,19 +123,33 @@ class Player extends PositionComponent with CollisionCallbacks {
 }
 
 // this class represents the game itself
-class Dragon extends FlameGame with PanDetector, HasCollisionDetection {
+class Dragon extends FlameGame
+    with PanDetector, HasCollisionDetection, HasTappables {
   late Player player;
+  late Back back;
+  late BuildContext c;
+  late int items;
+  Dragon(BuildContext con, int i) {
+    c = con;
+    items = i;
+  }
   @override
   Future<void> onLoad() async {
     await super.onLoad();
 
-    player = Player()
+    player = Player(items)
       ..position = size / 2
       ..width = 25
       ..height = 25
       ..anchor = Anchor.center;
     add(player);
     add(ScreenHitbox());
+    back = Back(c)
+      ..position = Vector2(100, 100)
+      ..width = 40
+      ..height = 40
+      ..anchor = Anchor.center;
+    add(back);
   }
 
   // spawns dangers every 2 seconds
@@ -130,7 +185,7 @@ class DragonW extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    runApp(GameWidget(game: Dragon()));
+    runApp(GameWidget(game: Dragon(context, item)));
     return const Scaffold();
   }
 }

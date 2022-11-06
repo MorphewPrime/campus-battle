@@ -66,3 +66,34 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+
+//MyApp2 shortcuts to the game map screen for returning from the game view
+class MyApp2 extends StatelessWidget {
+  MyApp2(int status, {super.key}) {
+    if (status == 1) {}
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    //runs a widget that builds the app
+    return MaterialApp(
+      //MaterialApp is the main widget that holds other widgets
+      debugShowCheckedModeBanner: false,
+      title: 'Campus Battle',
+      theme: ThemeData(
+        primaryColor: cPrimaryColor,
+        scaffoldBackgroundColor: const Color(0xFFFFFDE9),
+      ),
+      initialRoute:
+          '/gameMap', //tells program which screen to start with on launch
+      routes: {
+        '/welcScreen': (context) => const WelcomeScreen(),
+        '/loginScreen': (context) => const LoginScreen(),
+        '/createAccount': (context) => const CreateAccount(),
+        '/gameMap': (context) => const GameMap(),
+        '/tourView': (context) => const TourPanorama(),
+        '/dragon': (context) => const DragonW(),
+      },
+    );
+  }
+}
