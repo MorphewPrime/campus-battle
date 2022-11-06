@@ -44,6 +44,7 @@ class MyGameMap extends StatefulWidget {
 class _MyGameMapState extends State<MyGameMap> {
   late GoogleMapController mapController;
   late BitmapDescriptor firePinIcon;
+  late BitmapDescriptor enemy_sprite_1;
   late BitmapDescriptor tourPinIcon;
 
   final LatLng _center = const LatLng(38.95753752147627, -95.25334374853665);
@@ -116,6 +117,14 @@ class _MyGameMapState extends State<MyGameMap> {
       }));
     });
 
+    BitmapDescriptor.fromAssetImage(const ImageConfiguration(size: Size(1.0, 1.0)),
+            'assets/images/KnightSampleSprite.png')
+        .then((onValue) {
+      setState((() {
+        enemy_sprite_1 = onValue;
+      }));
+    });
+
     BitmapDescriptor.fromAssetImage(ImageConfiguration(size: Size(2.0, 2.0)),
             'assets/images/tour_icon_test_128.png')
         .then((onValue) {
@@ -163,6 +172,14 @@ class _MyGameMapState extends State<MyGameMap> {
         icon: firePinIcon,
         onTap: () {
           Navigator.pushNamed(context, "/dragon");
+        },
+      ),
+      Marker(
+        markerId: const MarkerId("Minigame1"),
+        position: const LatLng(38.9576, -95.25358),
+        icon: enemy_sprite_1,
+        onTap: () {
+          Navigator.pushNamed(context, "/minigame1");
         },
       ),
       Marker(
@@ -400,8 +417,10 @@ class _MyGameMapState extends State<MyGameMap> {
                   alignment: Alignment.bottomRight,
                   child: FloatingActionButton(
                     backgroundColor: Color(0xff0051ba),
-                    onPressed: _zoomToCurrentLocation,
-                    child: Icon(FontAwesomeIcons.bagShopping),
+                    onPressed: () {
+                      Navigator.pushNamed(context, '/inventory');
+                    },
+                    child: const Icon(FontAwesomeIcons.bagShopping),
                   ),
                 ),
               ),
