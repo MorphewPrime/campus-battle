@@ -9,6 +9,7 @@
 * brief: added firebase backend functionality for the create user process
 */
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -47,9 +48,17 @@ class _BodyState extends State<Body> {
   */
   Future createUser() async {
     try {
-      await FirebaseAuth.instance.createUserWithEmailAndPassword(
-          email: _emailController.text.trim(),
-          password: _passController.text.trim());
+      await FirebaseAuth.instance
+          .createUserWithEmailAndPassword(
+              email: _emailController.text.trim(),
+              password: _passController.text.trim())
+          .then((value) => {
+                // if (value.user.uid)
+                FirebaseFirestore.instance
+                    .collection('users')
+                    .doc(value.user?.uid)
+                    .set({"email": _emailController.text.trim()})
+              });
       Navigator.pushNamed(context, '/loginScreen');
     } on FirebaseAuthException catch (e) {
       var message = e.code;
