@@ -5,6 +5,7 @@
 * brief: designs the inventory screen
 */
 
+import 'package:campusbattle/screens/game/inventory/user_item_tile.dart';
 import 'package:flutter/material.dart';
 
 
@@ -28,14 +29,24 @@ class Body extends StatefulWidget {
 }
 
 class _BodyState extends State<Body> {
-  final List<String> entries = <String>['A', 'B', 'C'];
-  final List<int> colorCodes = <int>[600, 500, 100];
+
+  //List of Items - Will need to be replaced with user Item data from FireBase
+  List itemList = [
+    ["Sword", "Attacks Enemies - Does 2 Damage Per Hit", 3],
+    ["Better Sword", "Attacks Enemies - Does 4 Damage Per Hit", 1],
+    ["Another Sword", "Attacks", 5],
+    ["Another Sword", "Attacks", 5],
+    ["Another Sword", "Attacks", 5],
+    ["Another Sword", "Attacks", 5],
+    ["Another Sword", "Attacks", 5],
+  ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFFFFDE9),
+      backgroundColor: Color.fromARGB(255, 88, 153, 239),
       appBar: AppBar(
+        centerTitle: true,
         title: const Text("Inventory"),
         leading: BackButton(
           onPressed: () {
@@ -44,17 +55,15 @@ class _BodyState extends State<Body> {
         ),
         backgroundColor: const Color(0xff0051ba),
       ),
-      body: ListView.separated(
-        padding: const EdgeInsets.all(8),
-        itemCount: entries.length,
-        itemBuilder: (BuildContext context, int index) {
-          return Container(
-            height: 50,
-            color: Colors.blue[colorCodes[index]],
-            child: Center(child: Text('Item ${entries[index]}')),
+      body: ListView.builder(
+        itemCount: itemList.length,
+        itemBuilder:(context, index) {
+          return UserItemTile(
+            itemName: itemList[index][0],
+            itemQuantity: itemList[index][2], 
+            itemDesc: itemList[index][1],
           );
         },
-        separatorBuilder: (BuildContext context, int index) => const Divider(),
       ),
     );
   }

@@ -11,7 +11,7 @@
 
 import 'package:campusbattle/constants.dart';
 import 'package:campusbattle/screens/game/dragon.dart';
-import 'package:campusbattle/screens/game/inventory_screen.dart';
+import 'package:campusbattle/screens/game/inventory/inventory_screen.dart';
 import 'package:campusbattle/screens/game/map_main.dart';
 import 'package:campusbattle/screens/game/minigame_1_screen.dart';
 import 'package:campusbattle/screens/tour/tour_panorama.dart';
