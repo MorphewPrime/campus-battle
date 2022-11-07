@@ -53,7 +53,6 @@ class _BodyState extends State<Body> {
               email: _emailController.text.trim(),
               password: _passController.text.trim())
           .then((value) => {
-                // if (value.user.uid)
                 FirebaseFirestore.instance
                     .collection('users')
                     .doc(value.user?.uid)
