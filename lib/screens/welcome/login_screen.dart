@@ -11,6 +11,7 @@
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import '../../main.dart';
 
 //main class for login screen
 class LoginScreen extends StatelessWidget {
@@ -57,7 +58,9 @@ class _BodyState extends State<Body> {
       await FirebaseAuth.instance.signInWithEmailAndPassword(
           email: _emailController.text.trim(),
           password: _passController.text.trim());
-      Navigator.pushNamed(context, '/gameMap');
+      emailController = _emailController;
+      passController = _passController;
+      runApp(MyApp2(0));
     } on FirebaseAuthException catch (e) {
       var message = e.code;
       ScaffoldMessenger.of(context).showSnackBar(

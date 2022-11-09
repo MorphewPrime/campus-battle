@@ -17,12 +17,16 @@ import 'package:campusbattle/screens/game/minigame_1_screen.dart';
 import 'package:campusbattle/screens/tour/tour_panorama.dart';
 import 'package:campusbattle/screens/welcome/create_account_screen.dart';
 import 'package:campusbattle/screens/welcome/welcome_screen.dart';
+import 'package:campusbattle/screens/welcome/relog.dart';
 import 'package:flutter/material.dart';
 import 'package:campusbattle/screens/welcome/login_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/services.dart';
 import 'firebase_options.dart';
 import 'package:flame/game.dart';
+
+late final TextEditingController emailController;
+late final TextEditingController passController;
 
 //main() runs MyApp which builds the application
 void main() async {
@@ -41,6 +45,10 @@ void main() async {
 }
 
 //MyApp builds the root of the app
+/*
+    REFACTORED:
+    MyApp now exlusively handles the initial login screens
+*/
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
@@ -61,20 +69,24 @@ class MyApp extends StatelessWidget {
         '/welcScreen': (context) => const WelcomeScreen(),
         '/loginScreen': (context) => const LoginScreen(),
         '/createAccount': (context) => const CreateAccount(),
-        '/gameMap': (context) => const GameMap(),
-        '/tourView': (context) => const TourPanorama(),
-        '/dragon': (context) => const DragonW(),
-        '/inventory': (context) => const InventoryScreen(),
-        '/minigame1': (context) => const EnemyBattle1(),
       },
     );
   }
 }
 
 //MyApp2 shortcuts to the game map screen for returning from the game view
+/*
+    REFACTORED:
+    MyApp2 now handles the bulk of the main game
+*/
 class MyApp2 extends StatelessWidget {
+  late final String s;
   MyApp2(int status, {super.key}) {
-    if (status == 1) {}
+    if (status == 0) {
+      s = '/relog';
+    } else {
+      s = '/gameMap';
+    }
   }
 
   @override
@@ -88,15 +100,14 @@ class MyApp2 extends StatelessWidget {
         primaryColor: cPrimaryColor,
         scaffoldBackgroundColor: const Color(0xFFFFFDE9),
       ),
-      initialRoute:
-          '/gameMap', //tells program which screen to start with on launch
+      initialRoute: s, //tells program which screen to start with on launch
       routes: {
-        '/welcScreen': (context) => const WelcomeScreen(),
-        '/loginScreen': (context) => const LoginScreen(),
-        '/createAccount': (context) => const CreateAccount(),
+        '/relog': (context) => const relog(),
         '/gameMap': (context) => const GameMap(),
         '/tourView': (context) => const TourPanorama(),
         '/dragon': (context) => const DragonW(),
+        '/inventory': (context) => const InventoryScreen(),
+        '/minigame1': (context) => const EnemyBattle1(),
       },
     );
   }

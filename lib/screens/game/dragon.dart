@@ -27,7 +27,7 @@ class Back extends PositionComponent with Tappable {
 
     // Returns to old app, need to add a status to the return so it knows
     // what's going on
-    runApp(MyApp2(1));
+    runApp(MyApp2(0));
     return true;
   }
 
