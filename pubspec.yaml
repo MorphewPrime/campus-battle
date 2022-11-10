@@ -56,10 +56,15 @@ dependencies:
 
   #add flutter svg dependency
   flutter_svg: ^0.17.4
+
+  #add other necessary packages
   firebase_core: ^1.24.0
   firebase_auth: ^3.11.2
   cloud_firestore: ^3.5.1
   flame: ^1.4.0
+  getwidget: ^3.0.1
+  flutter_neumorphic: ^3.2.0
+  percent_indicator: ^3.4.0
 
 dev_dependencies:
   flutter_test:
@@ -90,6 +95,8 @@ flutter:
   assets:
     - assets/images/
     - assets/images/panoramas/
+    - assets/images/robotSprite/
+    - assets/images/profileIcons/
     - assets/map_style.json
 
 

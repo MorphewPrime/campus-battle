@@ -13,7 +13,7 @@ import 'package:campusbattle/constants.dart';
 import 'package:campusbattle/screens/game/dragon.dart';
 import 'package:campusbattle/screens/game/inventory/inventory_screen.dart';
 import 'package:campusbattle/screens/game/map_main.dart';
-import 'package:campusbattle/screens/game/minigame_1_screen.dart';
+import 'package:campusbattle/screens/game/minigame1/minigame_1_screen.dart';
 import 'package:campusbattle/screens/tour/tour_panorama.dart';
 import 'package:campusbattle/screens/welcome/create_account_screen.dart';
 import 'package:campusbattle/screens/welcome/welcome_screen.dart';
@@ -23,6 +23,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/services.dart';
 import 'firebase_options.dart';
 import 'package:flame/game.dart';
+
+import 'screens/game/profile/profile_screen.dart';
 
 //main() runs MyApp which builds the application
 void main() async {
@@ -66,6 +68,7 @@ class MyApp extends StatelessWidget {
         '/dragon': (context) => const DragonW(),
         '/inventory': (context) => const InventoryScreen(),
         '/minigame1': (context) => const EnemyBattle1(),
+        '/profile': (context) => const ProfileScreen(),
       },
     );
   }
@@ -97,6 +100,8 @@ class MyApp2 extends StatelessWidget {
         '/gameMap': (context) => const GameMap(),
         '/tourView': (context) => const TourPanorama(),
         '/dragon': (context) => const DragonW(),
+        '/minigame1': (context) => const EnemyBattle1(),
+        '/profile': (context) => const ProfileScreen(),
       },
     );
   }
