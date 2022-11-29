@@ -286,7 +286,9 @@ class _MyGameMapState extends State<MyGameMap> {
                     backgroundColor: Color(0xff0051ba),
                     onPressed: () async {
                       Navigator.pushNamed(
-                          context, '/loginScreen'); // for testing
+                          //context, '/loginScreen'); // for testing
+                          context,
+                          '/friends');
                     },
                     child: Icon(FontAwesomeIcons.plus),
                   ),

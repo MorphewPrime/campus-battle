@@ -12,6 +12,8 @@ import 'package:campusbattle/screens/game/profile/neu_box.dart';
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 
+import '../../../constants.dart';
+
 // import 'package:flutter_neumorphic/flutter_neumorphic.dart'; //may use this
 
 //main class for profile screen
@@ -59,9 +61,9 @@ class _BodyState extends State<Body> {
   // var accentColor = const Color.fromARGB(255, 10, 38, 154);
   // var lightAccentColor = Color.fromARGB(255, 146, 215, 255);
 
-  var mainColor = const Color.fromARGB(255, 224, 223, 217);
-  var accentColor = const Color.fromARGB(255, 151, 150, 131);
-  var lightAccentColor = const Color.fromARGB(255, 255, 255, 255);
+  // var mainColor = const Color.fromARGB(255, 224, 223, 217);
+  // var accentColor = const Color.fromARGB(255, 151, 150, 131);
+  // var lightAccentColor = const Color.fromARGB(255, 255, 255, 255);
 
   Widget build(BuildContext context) {
     return Scaffold(

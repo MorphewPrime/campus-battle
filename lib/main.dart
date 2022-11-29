@@ -11,6 +11,8 @@
 
 import 'package:campusbattle/constants.dart';
 import 'package:campusbattle/screens/game/dragon.dart';
+import 'package:campusbattle/screens/game/friends/add_friends_screen.dart';
+import 'package:campusbattle/screens/game/friends/friend_battle_screen.dart';
 import 'package:campusbattle/screens/game/inventory/inventory_screen.dart';
 import 'package:campusbattle/screens/game/map_main.dart';
 import 'package:campusbattle/screens/game/minigame1/minigame_1_screen.dart';
@@ -24,6 +26,7 @@ import 'package:flutter/services.dart';
 import 'firebase_options.dart';
 import 'package:flame/game.dart';
 
+import 'screens/game/friends/friends_screen.dart';
 import 'screens/game/profile/profile_screen.dart';
 
 //main() runs MyApp which builds the application
@@ -69,6 +72,9 @@ class MyApp extends StatelessWidget {
         '/inventory': (context) => const InventoryScreen(),
         '/minigame1': (context) => const EnemyBattle1(),
         '/profile': (context) => const ProfileScreen(),
+        '/friends': (context) => const FriendsScreen(),
+        '/addFriend': (context) => const AddFriendScreen(),
+        '/friendBattle': (context) => const FriendBattleScreen(),
       },
     );
   }
@@ -102,6 +108,9 @@ class MyApp2 extends StatelessWidget {
         '/dragon': (context) => const DragonW(),
         '/minigame1': (context) => const EnemyBattle1(),
         '/profile': (context) => const ProfileScreen(),
+        '/friends': (context) => const FriendsScreen(),
+        '/addFriend': (context) => const AddFriendScreen(),
+        '/friendBattle': (context) => const FriendBattleScreen(),
       },
     );
   }
