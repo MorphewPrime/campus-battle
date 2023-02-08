@@ -11,6 +11,11 @@
 * modified: 10/21/22
 * By: Jackson Morphew
 * brief: implementd marker fliter toggle switch.
+*
+
+* modified: 02/7/23
+* By: Logan Anderson
+* brief: Added more zones for different enemies.
 */
 
 import 'package:flutter/material.dart';
@@ -46,6 +51,13 @@ class _MyGameMapState extends State<MyGameMap> {
   late BitmapDescriptor firePinIcon;
   late BitmapDescriptor enemy_sprite_1;
   late BitmapDescriptor tourPinIcon;
+  late BitmapDescriptor bananaIcon;
+  late BitmapDescriptor virusIcon;
+  late BitmapDescriptor bballIcon;
+  late BitmapDescriptor brainIcon;
+  late BitmapDescriptor calcIcon;
+  late BitmapDescriptor robotIcon;
+  late BitmapDescriptor fballIcon;
 
   final LatLng _center = const LatLng(38.95753752147627, -95.25334374853665);
   final double toggleWidth = 45.0;
@@ -83,11 +95,49 @@ class _MyGameMapState extends State<MyGameMap> {
   List<Circle> _circles = <Circle>[];
   List<Polygon> _polygons = <Polygon>[];
 
+  //list of areas on campus to be mapped out
   List<LatLng> eng_points = [
     LatLng(38.958443842713194, -95.25499396950453),
     LatLng(38.957098806254166, -95.25498218000577),
     LatLng(38.95712717950423, -95.25219515938127),
     LatLng(38.95847971505341, -95.25226494148477),
+  ];
+  List<LatLng> bio_points = [
+    LatLng(38.95533900578628, -95.249199601207),
+    LatLng(38.956029247753726, -95.24917494510379),
+    LatLng(38.95605481214193, -95.24732573736269),
+    LatLng(38.955364570423484, -95.24732573736269),
+  ];
+  List<LatLng> fball_points = [
+    LatLng(38.964226721442074, -95.24801970341801),
+    LatLng(38.96182661104339, -95.24806882945164),
+    LatLng(38.9618520768325, -95.24490838795441),
+    LatLng(38.96426491882824, -95.24484288657622),
+  ];
+  List<LatLng> psych_points = [
+    LatLng(38.95745221945791, -95.2442657581175),
+    LatLng(38.95639531589266, -95.24391368820979),
+    LatLng(38.95644625136576, -95.24308673331026),
+    LatLng(38.957433118930936, -95.24307854563799),
+    LatLng(38.957796028063086, -95.24361893200798),
+  ];
+  List<LatLng> bball_points = [
+    LatLng(38.9548547544638, -95.2537929541689),
+    LatLng(38.954829741193464, -95.25143950855737),
+    LatLng(38.95356655956163, -95.25142342578553),
+    LatLng(38.953529038970835, -95.25376078862524),
+  ];
+  List<LatLng> math_points = [
+    LatLng(38.95839856272383, -95.24893146629574),
+    LatLng(38.95882855452792, -95.24870184202882),
+    LatLng(38.95905448137928, -95.24949381143924),
+    LatLng(38.9587010148582, -95.24978435643006),
+  ];
+  List<LatLng> memunion_points = [
+    LatLng(38.95883219852143, -95.24318617303469),
+    LatLng(38.960140377812834, -95.24288625562482),
+    LatLng(38.96021325617177, -95.24375320438773),
+    LatLng(38.95897066989578, -95.24405780800711),
   ];
 
   // method for getting user current location
@@ -108,6 +158,7 @@ class _MyGameMapState extends State<MyGameMap> {
     });
   }
 
+  //mapping imgs to pins
   Future<void> setIcons() async {
     BitmapDescriptor.fromAssetImage(ImageConfiguration(size: Size(2.0, 2.0)),
             'assets/images/icon_test_128.png')
@@ -133,11 +184,75 @@ class _MyGameMapState extends State<MyGameMap> {
         tourPinIcon = onValue;
       }));
     });
+    //banana
+    BitmapDescriptor.fromAssetImage(
+            const ImageConfiguration(size: Size(2.0, 2.0)),
+            'assets/images/banana-enemy.png')
+        .then((onValue) {
+      setState((() {
+        bananaIcon = onValue;
+      }));
+    });
+    //virus
+    BitmapDescriptor.fromAssetImage(
+            const ImageConfiguration(size: Size(2.0, 2.0)),
+            'assets/images/virus-enemy.png')
+        .then((onValue) {
+      setState((() {
+        virusIcon = onValue;
+      }));
+    });
+    //bball
+    BitmapDescriptor.fromAssetImage(
+            const ImageConfiguration(size: Size(2.0, 2.0)),
+            'assets/images/basketball-enemy.png')
+        .then((onValue) {
+      setState((() {
+        bballIcon = onValue;
+      }));
+    });
+    //brain
+    BitmapDescriptor.fromAssetImage(
+            const ImageConfiguration(size: Size(2.0, 2.0)),
+            'assets/images/brain-enemy.png')
+        .then((onValue) {
+      setState((() {
+        brainIcon = onValue;
+      }));
+    });
+    //calc
+    BitmapDescriptor.fromAssetImage(
+            const ImageConfiguration(size: Size(2.0, 2.0)),
+            'assets/images/calculator-enemy.png')
+        .then((onValue) {
+      setState((() {
+        calcIcon = onValue;
+      }));
+    });
+    //robot warrior
+    BitmapDescriptor.fromAssetImage(
+            const ImageConfiguration(size: Size(2.0, 2.0)),
+            'assets/images/robot-warrior-enemy.png')
+        .then((onValue) {
+      setState((() {
+        robotIcon = onValue;
+      }));
+    });
+    //football enemy
+    BitmapDescriptor.fromAssetImage(
+            const ImageConfiguration(size: Size(2.0, 2.0)),
+            'assets/images/football-enemy.png')
+        .then((onValue) {
+      setState((() {
+        fballIcon = onValue;
+      }));
+    });
   }
 
   void initialPinTests() {
     // polygons here for now
     _game_polygons.addAll([
+      //engineering - robot char?
       Polygon(
         polygonId: PolygonId("p1"),
         points: eng_points,
@@ -145,7 +260,56 @@ class _MyGameMapState extends State<MyGameMap> {
         strokeColor: Colors.black,
         fillColor: Colors.black.withOpacity(0.05),
       ),
+      //biology - virus character
+      Polygon(
+        polygonId: PolygonId("p2"),
+        points: bio_points,
+        strokeWidth: 1,
+        strokeColor: Colors.black,
+        fillColor: Colors.black.withOpacity(0.05),
+      ),
+      //football
+      Polygon(
+        polygonId: PolygonId("p3"),
+        points: fball_points,
+        strokeWidth: 1,
+        strokeColor: Colors.black,
+        fillColor: Colors.black.withOpacity(0.05),
+      ),
+      //psychology - brain character
+      Polygon(
+        polygonId: PolygonId("p4"),
+        points: psych_points,
+        strokeWidth: 1,
+        strokeColor: Colors.black,
+        fillColor: Colors.black.withOpacity(0.05),
+      ),
+      //bball
+      Polygon(
+        polygonId: PolygonId("p5"),
+        points: bball_points,
+        strokeWidth: 1,
+        strokeColor: Colors.black,
+        fillColor: Colors.black.withOpacity(0.05),
+      ),
+      //math
+      Polygon(
+        polygonId: PolygonId("p6"),
+        points: math_points,
+        strokeWidth: 1,
+        strokeColor: Colors.black,
+        fillColor: Colors.black.withOpacity(0.05),
+      ),
+      //food - union
+      Polygon(
+        polygonId: PolygonId("p7"),
+        points: memunion_points,
+        strokeWidth: 1,
+        strokeColor: Colors.black,
+        fillColor: Colors.black.withOpacity(0.05),
+      ),
     ]);
+
     // circles here for now
     _game_circles.addAll([
       Circle(
@@ -166,6 +330,7 @@ class _MyGameMapState extends State<MyGameMap> {
       ),
     ]);
 
+    //game character pins
     _game_markers.addAll([
       Marker(
         markerId: MarkerId("Dragon"),
@@ -175,6 +340,7 @@ class _MyGameMapState extends State<MyGameMap> {
           Navigator.pushNamed(context, "/dragon");
         },
       ),
+      //engineering character
       Marker(
         markerId: MarkerId("Virus"),
         position: LatLng(38.955619794191556, -95.24877858315892),
@@ -185,10 +351,11 @@ class _MyGameMapState extends State<MyGameMap> {
       ),
       Marker(
         markerId: const MarkerId("Minigame1"),
-        position: const LatLng(38.9576, -95.25358),
-        icon: enemy_sprite_1,
+        position: const LatLng(38.95736666517465, -95.25335608680122),
+        icon: robotIcon,
         onTap: () {
-          Navigator.pushNamed(context, "/minigame1");
+          Navigator.pushNamed(
+              context, "/minigame1"); //this game is just placeholder
         },
       ),
       Marker(
@@ -201,7 +368,69 @@ class _MyGameMapState extends State<MyGameMap> {
         // onTap: () {
         //   Navigator.pushNamed(context, '/tourView');
         // },
-      )
+      ),
+
+      //banana character
+      Marker(
+        markerId: MarkerId("Banana"),
+        position: LatLng(38.95956598498723, -95.24342139484858),
+        icon: bananaIcon,
+        onTap: () {
+          // Navigator.pushNamed(context, "/foodgame");
+        },
+      ),
+
+      //virus character
+      Marker(
+        markerId: MarkerId("Virus"),
+        position: LatLng(38.955519531910404, -95.24829149126616),
+        icon: virusIcon,
+        onTap: () {
+          // Navigator.pushNamed(context, "/virusgame");
+        },
+      ),
+
+      //basketball character
+      Marker(
+        markerId: MarkerId("Basketball"),
+        position: LatLng(38.95433532277486, -95.25273841585633),
+        icon: bballIcon,
+        onTap: () {
+          // Navigator.pushNamed(context, "/bballgame");
+        },
+      ),
+
+      //brain character
+      Marker(
+        markerId: MarkerId("Brain"),
+        position: LatLng(38.95724922989544, -95.24356653149819),
+        icon: brainIcon,
+        onTap: () {
+          // Navigator.pushNamed(context, "/psychgame");
+        },
+      ),
+
+      //calc character
+      Marker(
+        markerId: MarkerId("Calc"),
+        position: LatLng(38.95858706606061, -95.24919921612755),
+        icon: calcIcon,
+        onTap: () {
+          // Navigator.pushNamed(context, "/mathgame");
+        },
+      ),
+
+      //robot is up top
+
+      //football character
+      Marker(
+        markerId: MarkerId("Football"),
+        position: LatLng(38.96266119764685, -95.24633459833956),
+        icon: fballIcon,
+        onTap: () {
+          // Navigator.pushNamed(context, "/footballgame");
+        },
+      ),
     ]);
 
     _tour_markers.addAll([
