@@ -341,14 +341,14 @@ class _MyGameMapState extends State<MyGameMap> {
         },
       ),
       //engineering character
-      Marker(
-        markerId: MarkerId("Virus"),
-        position: LatLng(38.955619794191556, -95.24877858315892),
-        icon: firePinIcon,
-        onTap: () {
-          Navigator.pushNamed(context, "/virus");
-        },
-      ),
+      // Marker(
+      //   markerId: MarkerId("Virus1"),
+      //   position: LatLng(38.955619794191556, -95.24877858315892),
+      //   icon: firePinIcon,
+      //   onTap: () {
+      //     Navigator.pushNamed(context, "/virus");
+      //   },
+      // ),
       Marker(
         markerId: const MarkerId("Minigame1"),
         position: const LatLng(38.95736666517465, -95.25335608680122),
@@ -386,7 +386,7 @@ class _MyGameMapState extends State<MyGameMap> {
         position: LatLng(38.955519531910404, -95.24829149126616),
         icon: virusIcon,
         onTap: () {
-          // Navigator.pushNamed(context, "/virusgame");
+          Navigator.pushNamed(context, "/virus");
         },
       ),
 
@@ -428,7 +428,7 @@ class _MyGameMapState extends State<MyGameMap> {
         position: LatLng(38.96266119764685, -95.24633459833956),
         icon: fballIcon,
         onTap: () {
-          // Navigator.pushNamed(context, "/footballgame");
+          Navigator.pushNamed(context, "/football");
         },
       ),
     ]);
