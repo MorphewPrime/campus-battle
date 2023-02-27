@@ -15,6 +15,7 @@ import 'package:campusbattle/screens/game/friends/add_friends_screen.dart';
 import 'package:campusbattle/screens/game/friends/friend_battle_screen.dart';
 import 'package:campusbattle/screens/game/inventory/inventory_screen.dart';
 import 'package:campusbattle/screens/game/map_main.dart';
+import 'package:campusbattle/screens/game/mathgame/mathgame_screen.dart';
 import 'package:campusbattle/screens/game/minigame1/minigame_1_screen.dart';
 import 'package:campusbattle/screens/tour/tour_panorama.dart';
 import 'package:campusbattle/screens/welcome/create_account_screen.dart';
@@ -75,6 +76,7 @@ class MyApp extends StatelessWidget {
         '/friends': (context) => const FriendsScreen(),
         '/addFriend': (context) => const AddFriendScreen(),
         '/friendBattle': (context) => const FriendBattleScreen(),
+        '/mathgame': (context) => const MathGame(),
       },
     );
   }

@@ -408,7 +408,7 @@ class _MyGameMapState extends State<MyGameMap> {
         position: LatLng(38.95858706606061, -95.24919921612755),
         icon: calcIcon,
         onTap: () {
-          // Navigator.pushNamed(context, "/mathgame");
+          Navigator.pushNamed(context, "/mathgame");
         },
       ),
 
