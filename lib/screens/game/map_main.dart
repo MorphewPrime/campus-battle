@@ -341,6 +341,14 @@ class _MyGameMapState extends State<MyGameMap> {
         },
       ),
       //engineering character
+      // Marker(
+      //   markerId: MarkerId("Virus1"),
+      //   position: LatLng(38.955619794191556, -95.24877858315892),
+      //   icon: firePinIcon,
+      //   onTap: () {
+      //     Navigator.pushNamed(context, "/virus");
+      //   },
+      // ),
       Marker(
         markerId: const MarkerId("Minigame1"),
         position: const LatLng(38.95736666517465, -95.25335608680122),
@@ -378,7 +386,7 @@ class _MyGameMapState extends State<MyGameMap> {
         position: LatLng(38.955519531910404, -95.24829149126616),
         icon: virusIcon,
         onTap: () {
-          // Navigator.pushNamed(context, "/virusgame");
+          Navigator.pushNamed(context, "/virus");
         },
       ),
 
@@ -420,7 +428,7 @@ class _MyGameMapState extends State<MyGameMap> {
         position: LatLng(38.96266119764685, -95.24633459833956),
         icon: fballIcon,
         onTap: () {
-          // Navigator.pushNamed(context, "/footballgame");
+          Navigator.pushNamed(context, "/football");
         },
       ),
     ]);
@@ -575,71 +583,69 @@ class _MyGameMapState extends State<MyGameMap> {
                   alignment: Alignment.bottomLeft,
                   child: FloatingActionButton(
                     backgroundColor: Color(0xff0051ba),
-                    onPressed: () {
-                      //Didn't want to mess with this: - Just left commented for now - working profile code is below
-                      // getUserCurrentLocation().then((value) async {
-                      //   print(value.latitude.toString() +
-                      //       " " +
-                      //       value.longitude.toString());
+                    onPressed: () async {
+                      getUserCurrentLocation().then((value) async {
+                        print(value.latitude.toString() +
+                            " " +
+                            value.longitude.toString());
 
-                      //   // marker added for current users location
-                      //   setState(() {
-                      //     _game_markers.add(Marker(
-                      //       markerId: MarkerId(value.latitude.toString()),
-                      //       position: LatLng(value.latitude, value.longitude),
-                      //       icon: firePinIcon,
-                      //       infoWindow: InfoWindow(
-                      //         title: 'My Current Location',
-                      //       ),
-                      //       // onTap: () {
-                      //       //   Navigator.pushNamed(context, '/tourView');
-                      //       // },
-                      //     ));
+                        // marker added for current users location
+                        setState(() {
+                          _game_markers.add(Marker(
+                            markerId: MarkerId(value.latitude.toString()),
+                            position: LatLng(value.latitude, value.longitude),
+                            icon: firePinIcon,
+                            infoWindow: InfoWindow(
+                              title: 'My Current Location',
+                            ),
+                            // onTap: () {
+                            //   Navigator.pushNamed(context, '/tourView');
+                            // },
+                          ));
 
-                      //     // _tour_markers.addAll([
-                      //     //   Marker(
-                      //     //     markerId: MarkerId("2"),
-                      //     //     position: LatLng(38.957115, -95.254390),
-                      //     //     // icon: firePinIcon,
-                      //     //     // infoWindow: InfoWindow(
-                      //     //     //   title: 'My Current Location',
-                      //     //     // ),
-                      //     //     onTap: () {
-                      //     //       Navigator.pushNamed(context, '/tourView');
-                      //     //     },
-                      //     //   ),
-                      //     //   Marker(
-                      //     //     markerId: MarkerId("2"),
-                      //     //     position: LatLng(38.957115, -95.254390),
-                      //     //     // icon: firePinIcon,
-                      //     //     // infoWindow: InfoWindow(
-                      //     //     //   title: 'My Current Location',
-                      //     //     // ),
-                      //     //     onTap: () {
-                      //     //       Navigator.pushNamed(context, '/tourView');
-                      //     //     },
-                      //     //   ),
-                      //     // ]);
+                          // _tour_markers.addAll([
+                          //   Marker(
+                          //     markerId: MarkerId("2"),
+                          //     position: LatLng(38.957115, -95.254390),
+                          //     // icon: firePinIcon,
+                          //     // infoWindow: InfoWindow(
+                          //     //   title: 'My Current Location',
+                          //     // ),
+                          //     onTap: () {
+                          //       Navigator.pushNamed(context, '/tourView');
+                          //     },
+                          //   ),
+                          //   Marker(
+                          //     markerId: MarkerId("2"),
+                          //     position: LatLng(38.957115, -95.254390),
+                          //     // icon: firePinIcon,
+                          //     // infoWindow: InfoWindow(
+                          //     //   title: 'My Current Location',
+                          //     // ),
+                          //     onTap: () {
+                          //       Navigator.pushNamed(context, '/tourView');
+                          //     },
+                          //   ),
+                          // ]);
 
-                      //     _markers += _game_markers;
-                      //     // _markers = _markers +
-                      //     //     [
-                      //     //       Marker(
-                      //     //         markerId: MarkerId(value.latitude.toString()),
-                      //     //         position:
-                      //     //             LatLng(value.latitude, value.longitude),
-                      //     //         icon: firePinIcon,
-                      //     //         // infoWindow: InfoWindow(
-                      //     //         //   title: 'My Current Location',
-                      //     //         // ),
-                      //     //         onTap: () {
-                      //     //           Navigator.pushNamed(context, '/tourView');
-                      //     //         },
-                      //     //       )
-                      //     //     ];
-                      //   }); // setState
-                      // });
-                      Navigator.pushNamed(context, '/profile');
+                          _markers += _game_markers;
+                          // _markers = _markers +
+                          //     [
+                          //       Marker(
+                          //         markerId: MarkerId(value.latitude.toString()),
+                          //         position:
+                          //             LatLng(value.latitude, value.longitude),
+                          //         icon: firePinIcon,
+                          //         // infoWindow: InfoWindow(
+                          //         //   title: 'My Current Location',
+                          //         // ),
+                          //         onTap: () {
+                          //           Navigator.pushNamed(context, '/tourView');
+                          //         },
+                          //       )
+                          //     ];
+                        }); // setState
+                      });
                     },
                     child: Icon(FontAwesomeIcons.userLarge),
                   ),
