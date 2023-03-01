@@ -583,69 +583,72 @@ class _MyGameMapState extends State<MyGameMap> {
                   alignment: Alignment.bottomLeft,
                   child: FloatingActionButton(
                     backgroundColor: Color(0xff0051ba),
-                    onPressed: () async {
-                      getUserCurrentLocation().then((value) async {
-                        print(value.latitude.toString() +
-                            " " +
-                            value.longitude.toString());
+                    onPressed: () {
+                      //Didn't want to mess with this: - Just left commented for now - working profile code is below
+                      // getUserCurrentLocation().then((value) async {
+                      //   print(value.latitude.toString() +
+                      //       " " +
+                      //       value.longitude.toString());
 
-                        // marker added for current users location
-                        setState(() {
-                          _game_markers.add(Marker(
-                            markerId: MarkerId(value.latitude.toString()),
-                            position: LatLng(value.latitude, value.longitude),
-                            icon: firePinIcon,
-                            infoWindow: InfoWindow(
-                              title: 'My Current Location',
-                            ),
-                            // onTap: () {
-                            //   Navigator.pushNamed(context, '/tourView');
-                            // },
-                          ));
+                      //   // marker added for current users location
+                      //   setState(() {
+                      //     _game_markers.add(Marker(
+                      //       markerId: MarkerId(value.latitude.toString()),
+                      //       position: LatLng(value.latitude, value.longitude),
+                      //       icon: firePinIcon,
+                      //       infoWindow: InfoWindow(
+                      //         title: 'My Current Location',
+                      //       ),
+                      //       // onTap: () {
+                      //       //   Navigator.pushNamed(context, '/tourView');
+                      //       // },
+                      //     ));
 
-                          // _tour_markers.addAll([
-                          //   Marker(
-                          //     markerId: MarkerId("2"),
-                          //     position: LatLng(38.957115, -95.254390),
-                          //     // icon: firePinIcon,
-                          //     // infoWindow: InfoWindow(
-                          //     //   title: 'My Current Location',
-                          //     // ),
-                          //     onTap: () {
-                          //       Navigator.pushNamed(context, '/tourView');
-                          //     },
-                          //   ),
-                          //   Marker(
-                          //     markerId: MarkerId("2"),
-                          //     position: LatLng(38.957115, -95.254390),
-                          //     // icon: firePinIcon,
-                          //     // infoWindow: InfoWindow(
-                          //     //   title: 'My Current Location',
-                          //     // ),
-                          //     onTap: () {
-                          //       Navigator.pushNamed(context, '/tourView');
-                          //     },
-                          //   ),
-                          // ]);
+                      //     // _tour_markers.addAll([
+                      //     //   Marker(
+                      //     //     markerId: MarkerId("2"),
+                      //     //     position: LatLng(38.957115, -95.254390),
+                      //     //     // icon: firePinIcon,
+                      //     //     // infoWindow: InfoWindow(
+                      //     //     //   title: 'My Current Location',
+                      //     //     // ),
+                      //     //     onTap: () {
+                      //     //       Navigator.pushNamed(context, '/tourView');
+                      //     //     },
+                      //     //   ),
+                      //     //   Marker(
+                      //     //     markerId: MarkerId("2"),
+                      //     //     position: LatLng(38.957115, -95.254390),
+                      //     //     // icon: firePinIcon,
+                      //     //     // infoWindow: InfoWindow(
+                      //     //     //   title: 'My Current Location',
+                      //     //     // ),
+                      //     //     onTap: () {
+                      //     //       Navigator.pushNamed(context, '/tourView');
+                      //     //     },
+                      //     //   ),
+                      //     // ]);
 
-                          _markers += _game_markers;
-                          // _markers = _markers +
-                          //     [
-                          //       Marker(
-                          //         markerId: MarkerId(value.latitude.toString()),
-                          //         position:
-                          //             LatLng(value.latitude, value.longitude),
-                          //         icon: firePinIcon,
-                          //         // infoWindow: InfoWindow(
-                          //         //   title: 'My Current Location',
-                          //         // ),
-                          //         onTap: () {
-                          //           Navigator.pushNamed(context, '/tourView');
-                          //         },
-                          //       )
-                          //     ];
-                        }); // setState
-                      });
+                      //     _markers += _game_markers;
+                      //     // _markers = _markers +
+                      //     //     [
+                      //     //       Marker(
+                      //     //         markerId: MarkerId(value.latitude.toString()),
+                      //     //         position:
+                      //     //             LatLng(value.latitude, value.longitude),
+                      //     //         icon: firePinIcon,
+                      //     //         // infoWindow: InfoWindow(
+                      //     //         //   title: 'My Current Location',
+                      //     //         // ),
+                      //     //         onTap: () {
+                      //     //           Navigator.pushNamed(context, '/tourView');
+                      //     //         },
+                      //     //       )
+                      //     //     ];
+                      //   }); // setState
+                      // });
+                      Navigator.pushNamed(context, '/profile');
+                      // setState
                     },
                     child: Icon(FontAwesomeIcons.userLarge),
                   ),
