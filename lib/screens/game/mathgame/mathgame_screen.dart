@@ -8,6 +8,13 @@
 //idea of game: math equations with choices that float from the bottom of
 //the screen to the top, rewards more points if gotten quicker
 
+//-------EDITS-----------
+//3-7-23
+//by Logan Anderson
+//Added movement of the buttons
+
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'dart:math';
 
@@ -50,6 +57,14 @@ class MathGame extends StatefulWidget {
 }
 
 class _MathGameState extends State<MathGame> {
+  //space from bottom to move it up
+  double _spaceFromBottom = 0;
+  int _faster = 0;
+
+  //timers
+  late Timer _timer1;
+  late Timer _timer2;
+
   int _currentRound = 0;
   int _score = 0;
   List<int> _usedQuestions = [];
@@ -90,7 +105,9 @@ class _MathGameState extends State<MathGame> {
     // if (_currentQuestion != null && answer == _currentQuestion!.answer) {
     setState(() {
       if (_currentQuestion != null && answer == _currentQuestion!.answer) {
-        _score += 10;
+        // _score += 10 ;
+        //make score dependent on space from bottom
+        _score += 11 - (_spaceFromBottom / 45.5).round();
       }
       _currentRound++;
       if (_currentRound >= 10) {
@@ -100,6 +117,10 @@ class _MathGameState extends State<MathGame> {
       } else {
         _generateQuestion();
       }
+
+      //move buttons back to bottom
+      _spaceFromBottom = 0;
+      _faster += 3;
     });
     // }
   }
@@ -108,6 +129,44 @@ class _MathGameState extends State<MathGame> {
   void initState() {
     super.initState();
     _generateQuestion();
+
+    //timers
+    _timer1 = Timer.periodic(Duration(milliseconds: 300), (timer) {
+      setState(() {
+        _spaceFromBottom += 5 + _faster;
+      });
+    });
+    // Stream.periodic(Duration(milliseconds: 300), (count) {
+    //   return count * 5;
+    // }).listen((milliseconds) {
+    //   setState(() {
+    //     _spaceFromBottom += milliseconds - _faster;
+    //   });
+    // });
+
+    _timer2 = Timer.periodic(Duration(seconds: 1), (timer) {
+      if (_spaceFromBottom > 455 && _currentRound <= 10) {
+        setState(() {
+          _currentRound++;
+          _generateQuestion();
+          _spaceFromBottom = 0;
+          _faster += 3;
+        });
+      }
+      if (_currentRound >= 10) {
+        Navigator.of(context).pushReplacement(MaterialPageRoute(
+          builder: (context) => MathScoreScreen(score: _score),
+        ));
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    _timer1.cancel();
+    _timer2.cancel();
+
+    super.dispose();
   }
 
   @override
@@ -154,55 +213,69 @@ class _MathGameState extends State<MathGame> {
                     color: Colors.white),
               ),
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                ElevatedButton(
-                  onPressed: () {
-                    _checkAnswer(_answerOption1);
-                  },
-                  style: ElevatedButton.styleFrom(
-                    shape: const CircleBorder(),
-                    padding: const EdgeInsets.all(16.0),
-                    backgroundColor: Colors.tealAccent.shade400,
-                    foregroundColor: Colors.black,
+            Expanded(
+              child: Stack(
+                fit: StackFit.expand,
+                children: [
+                  Positioned(
+                    bottom: _spaceFromBottom,
+                    left: 5,
+                    right: 5,
+                    child: Center(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          ElevatedButton(
+                            onPressed: () {
+                              _checkAnswer(_answerOption1);
+                            },
+                            style: ElevatedButton.styleFrom(
+                              shape: const CircleBorder(),
+                              padding: const EdgeInsets.all(16.0),
+                              backgroundColor: Colors.tealAccent.shade400,
+                              foregroundColor: Colors.black,
+                            ),
+                            child: Text(
+                              "$_answerOption1",
+                              style: const TextStyle(fontSize: 24),
+                            ),
+                          ),
+                          ElevatedButton(
+                            onPressed: () {
+                              _checkAnswer(_answerOption2);
+                            },
+                            style: ElevatedButton.styleFrom(
+                              shape: const CircleBorder(),
+                              padding: const EdgeInsets.all(16.0),
+                              backgroundColor: Colors.tealAccent.shade400,
+                              foregroundColor: Colors.black,
+                            ),
+                            child: Text(
+                              "$_answerOption2",
+                              style: const TextStyle(fontSize: 24),
+                            ),
+                          ),
+                          ElevatedButton(
+                            onPressed: () {
+                              _checkAnswer(_answerOption3);
+                            },
+                            style: ElevatedButton.styleFrom(
+                              shape: const CircleBorder(),
+                              padding: const EdgeInsets.all(16.0),
+                              backgroundColor: Colors.tealAccent.shade400,
+                              foregroundColor: Colors.black,
+                            ),
+                            child: Text(
+                              "$_answerOption3",
+                              style: const TextStyle(fontSize: 24),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
                   ),
-                  child: Text(
-                    _answerOption1.toString(),
-                    style: const TextStyle(fontSize: 24.0),
-                  ),
-                ),
-                ElevatedButton(
-                  onPressed: () {
-                    _checkAnswer(_answerOption2);
-                  },
-                  style: ElevatedButton.styleFrom(
-                    shape: const CircleBorder(),
-                    padding: const EdgeInsets.all(16.0),
-                    backgroundColor: Colors.tealAccent.shade400,
-                    foregroundColor: Colors.black,
-                  ),
-                  child: Text(
-                    _answerOption2.toString(),
-                    style: const TextStyle(fontSize: 24.0),
-                  ),
-                ),
-                ElevatedButton(
-                  onPressed: () {
-                    _checkAnswer(_answerOption3);
-                  },
-                  style: ElevatedButton.styleFrom(
-                    shape: const CircleBorder(),
-                    padding: const EdgeInsets.all(16.0),
-                    backgroundColor: Colors.tealAccent.shade400,
-                    foregroundColor: Colors.black,
-                  ),
-                  child: Text(
-                    _answerOption3.toString(),
-                    style: const TextStyle(fontSize: 24.0),
-                  ),
-                ),
-              ],
+                ],
+              ),
             ),
           ],
         ),
