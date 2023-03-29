@@ -6,13 +6,35 @@
 
 import 'package:flutter/material.dart';
 import 'mathgame_screen.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class MathScoreScreen extends StatelessWidget {
   final int score;
+  int highscore;
 
   //ITEMS?
   //if score is >= 70: give item
   //if not dont
+
+  //@author: Peter Gessler
+  //@brief: gets the game's highscore from database
+  Future getHighScore() async {
+    final document = await FirebaseFirestore.instance
+        .collection("high_scores")
+        .doc("math")
+        .get();
+
+    return document['highscore'];
+  }
+
+  // TODO
+  //@author: Peter Gessler
+  //@brief: updates the game's highscore in database, if needed
+  Future updateHighScore() async {
+    final scoreRef =
+        FirebaseFirestore.instance.collection("high_scores").doc("math");
+    scoreRef.update({"score": score});
+  }
 
   MathScoreScreen({super.key, required this.score});
 
