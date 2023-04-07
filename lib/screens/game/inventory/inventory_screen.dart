@@ -9,9 +9,17 @@
 * brief: added ability to pull itmes to display from the Firestore database.
 */
 
+//
+// modified: 4/07/2023
+// By: Logan Anderson
+// brief: changed UI to match other screens UI
+//
+
+import 'package:campusbattle/constants.dart';
 import 'package:campusbattle/screens/game/inventory/user_item_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:campusbattle/screens/game/profile/neu_box.dart';
 
 //main class for Inventory screen
 class InventoryScreen extends StatelessWidget {
@@ -60,46 +68,79 @@ class _BodyState extends State<Body> {
 
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 88, 153, 239),
-      appBar: AppBar(
-        centerTitle: true,
-        title: const Text("Inventory"),
-        leading: BackButton(
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
-        backgroundColor: const Color(0xff0051ba),
-      ),
-      body: FutureBuilder(
-        future: loadItems(),
-        builder: (BuildContext context, snapshot) {
-          if (snapshot.hasData) {
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              return Center(
-                child: CircularProgressIndicator(),
-              );
-            } else {
-              return Center(
-                // here only return is missing
-                child: ListView.builder(
-                  itemCount: snapshot.data.docs.length,
-                  itemBuilder: (context, index) {
-                    DocumentSnapshot document = snapshot.data.docs[index];
-                    return UserItemTile(
-                      itemName: document['name'],
-                      itemQuantity: document['quantity'],
-                      itemDesc: document['description'],
-                    );
-                  },
+      backgroundColor: mainColor,
+      body: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.fromLTRB(25, 50, 25, 0),
+            child: Row(
+              children: [
+                Container(
+                  child: InkWell(
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
+                    child: SizedBox(
+                      height: 60,
+                      width: 60,
+                      child: NeuBox(
+                        color1: mainColor,
+                        color2: accentColor,
+                        color3: lightAccentColor,
+                        child: const Icon(
+                          Icons.arrow_back,
+                        ),
+                      ),
+                    ),
+                  ),
                 ),
-              );
-            }
-          } else if (snapshot.hasError) {
-            return Text('no data');
-          }
-          return CircularProgressIndicator();
-        },
+                const Expanded(
+                  child: Padding(
+                    padding: EdgeInsets.fromLTRB(0, 0, 60, 0),
+                    child: Text(
+                      "I N V E N T O R Y",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(fontSize: 16),
+                    ),
+                  ),
+                )
+              ],
+            ),
+          ),
+          Expanded(
+            child: FutureBuilder(
+              future: loadItems(),
+              builder: (BuildContext context, snapshot) {
+                if (snapshot.hasData) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  } else {
+                    return Center(
+                      child: ListView.builder(
+                        itemCount: snapshot.data.docs.length,
+                        itemBuilder: (context, index) {
+                          DocumentSnapshot document = snapshot.data.docs[index];
+                          return UserItemTile(
+                            itemName: document['name'],
+                            itemQuantity: document['quantity'],
+                            itemDesc: document['description'],
+                          );
+                        },
+                      ),
+                    );
+                  }
+                } else if (snapshot.hasError) {
+                  return Text('no data');
+                }
+                return Center(
+                  child: CircularProgressIndicator(),
+                );
+              },
+            ),
+          ),
+        ],
       ),
     );
   }

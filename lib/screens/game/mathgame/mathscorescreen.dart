@@ -10,7 +10,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class MathScoreScreen extends StatelessWidget {
   final int score;
-  int highscore;
+  // int highscore;
 
   //ITEMS?
   //if score is >= 70: give item
