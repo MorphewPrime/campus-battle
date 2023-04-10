@@ -350,12 +350,12 @@ class _MyGameMapState extends State<MyGameMap> {
       //   },
       // ),
       Marker(
-        markerId: const MarkerId("Minigame1"),
+        markerId: const MarkerId("enggame"),
         position: const LatLng(38.95736666517465, -95.25335608680122),
         icon: robotIcon,
         onTap: () {
           Navigator.pushNamed(
-              context, "/minigame1"); //this game is just placeholder
+              context, "/enggame"); //this game is just placeholder
         },
       ),
       Marker(
@@ -491,7 +491,8 @@ class _MyGameMapState extends State<MyGameMap> {
                 Navigator.pushNamed(context, '/loginScreen');
               },
             ),
-            title: const Text('Maps Sample App'),
+            centerTitle: true,
+            title: const Text('Campus Battle'),
             backgroundColor: Color(0xff0051ba),
           ),
           body: GoogleMap(

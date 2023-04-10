@@ -11,6 +11,7 @@
 
 import 'package:campusbattle/constants.dart';
 import 'package:campusbattle/screens/game/dragon.dart';
+import 'package:campusbattle/screens/game/engineering/engGame.dart';
 import 'package:campusbattle/screens/game/virus.dart';
 import 'package:campusbattle/screens/game/football.dart';
 import 'package:campusbattle/screens/game/friends/add_friends_screen.dart';
@@ -18,7 +19,6 @@ import 'package:campusbattle/screens/game/friends/friend_battle_screen.dart';
 import 'package:campusbattle/screens/game/inventory/inventory_screen.dart';
 import 'package:campusbattle/screens/game/map_main.dart';
 import 'package:campusbattle/screens/game/mathgame/mathgame_screen.dart';
-import 'package:campusbattle/screens/game/minigame1/minigame_1_screen.dart';
 import 'package:campusbattle/screens/tour/tour_panorama.dart';
 import 'package:campusbattle/screens/welcome/create_account_screen.dart';
 import 'package:campusbattle/screens/welcome/welcome_screen.dart';
@@ -75,7 +75,7 @@ class MyApp extends StatelessWidget {
         '/virus': (context) => const VirusW(),
         '/football': (context) => const FootballW(),
         '/inventory': (context) => const InventoryScreen(),
-        '/minigame1': (context) => const EnemyBattle1(),
+        '/enggame': (context) => const EngGame(),
         '/profile': (context) => const ProfileScreen(),
         '/friends': (context) => const FriendsScreen(),
         '/addFriend': (context) => const AddFriendScreen(),
@@ -114,7 +114,7 @@ class MyApp2 extends StatelessWidget {
         '/dragon': (context) => const DragonW(),
         '/virus': (context) => const VirusW(),
         '/football': (context) => const FootballW(),
-        '/minigame1': (context) => const EnemyBattle1(),
+        '/enggame': (context) => const EngGame(),
         '/profile': (context) => const ProfileScreen(),
         '/friends': (context) => const FriendsScreen(),
         '/addFriend': (context) => const AddFriendScreen(),
