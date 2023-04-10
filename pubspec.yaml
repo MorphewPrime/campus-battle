@@ -95,7 +95,6 @@ flutter:
   assets:
     - assets/images/
     - assets/images/panoramas/
-    - assets/images/robotSprite/
     - assets/images/profileIcons/
     - assets/map_style.json
 
