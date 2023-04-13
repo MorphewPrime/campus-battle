@@ -8,33 +8,82 @@ import 'package:flutter/material.dart';
 import 'mathgame_screen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class MathScoreScreen extends StatelessWidget {
+//created gthe highscore widget to display and update the highscore
+// Author: Peter Gessler
+class HighScore extends StatelessWidget {
+  HighScore(this.score);
+
   final int score;
-  // int highscore;
 
-  //ITEMS?
-  //if score is >= 70: give item
-  //if not dont
-
-  //@author: Peter Gessler
-  //@brief: gets the game's highscore from database
-  Future getHighScore() async {
+  //gets the game's highscore from database
+  Future getHighScore(score) async {
     final document = await FirebaseFirestore.instance
         .collection("high_scores")
         .doc("math")
         .get();
-
-    return document['highscore'];
+    final highscore = document['highscore'];
+    if (score > highscore) {
+      FirebaseFirestore.instance
+          .collection("high_scores")
+          .doc("math")
+          .update({"score": score});
+      return score;
+    }
+    return highscore;
   }
 
   // TODO
-  //@author: Peter Gessler
-  //@brief: updates the game's highscore in database, if needed
-  Future updateHighScore() async {
-    final scoreRef =
-        FirebaseFirestore.instance.collection("high_scores").doc("math");
-    scoreRef.update({"score": score});
+  // updates the game's highscore in database, if needed
+  // Future updateHighScore() async {
+  //   final scoreRef =
+  //       FirebaseFirestore.instance.collection("high_scores").doc("math");
+  //   scoreRef.update({"score": score});
+  // }
+
+  Widget build(BuildContext context) {
+    return SafeArea(
+        child: Scaffold(
+      appBar: AppBar(
+        title: Text('High Scores'),
+      ),
+      body: FutureBuilder(
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.done) {
+            if (snapshot.hasError) {
+              return Center(
+                child: Text(
+                  '${snapshot.error} occurred',
+                  style: TextStyle(fontSize: 18),
+                ),
+              );
+            } else if (snapshot.hasData) {
+              final data = snapshot.data;
+              if (score > data) {}
+              return Center(
+                child: Text(
+                  '$data',
+                  style: TextStyle(fontSize: 18),
+                ),
+              );
+            }
+          }
+
+          return Center(
+            child: CircularProgressIndicator(),
+          );
+        },
+        future: getHighScore(score),
+      ),
+    ));
   }
+}
+
+class MathScoreScreen extends StatelessWidget {
+  final int score;
+
+  //ITEMS?
+  //if score is >= 70: give item
+  //if not dont
 
   MathScoreScreen({super.key, required this.score});
 
@@ -82,6 +131,13 @@ class MathScoreScreen extends StatelessWidget {
                           style: TextStyle(fontSize: 24, color: Colors.white),
                         ),
                         SizedBox(height: 20.0),
+                        ElevatedButton(
+                            onPressed: () => Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (ctx) => HighScore(score),
+                                )),
+                            child: Text('Highscores')),
                         ElevatedButton(
                           onPressed: () {
                             Navigator.of(context).pop();
