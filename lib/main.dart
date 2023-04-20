@@ -114,11 +114,13 @@ class MyApp2 extends StatelessWidget {
         '/dragon': (context) => const DragonW(),
         '/virus': (context) => const VirusW(),
         '/football': (context) => const FootballW(),
+        '/inventory': (context) => const InventoryScreen(),
         '/enggame': (context) => const EngGame(),
         '/profile': (context) => const ProfileScreen(),
         '/friends': (context) => const FriendsScreen(),
         '/addFriend': (context) => const AddFriendScreen(),
         '/friendBattle': (context) => const FriendBattleScreen(),
+        '/mathgame': (context) => const MathGame(),
       },
     );
   }
