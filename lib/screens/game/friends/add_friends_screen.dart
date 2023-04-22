@@ -20,6 +20,7 @@ class AddFriendScreen extends StatefulWidget {
   State<AddFriendScreen> createState() => _AddFriendScreenState();
 }
 
+// Test class with friend data
 class _AddFriendScreenState extends State<AddFriendScreen> {
   List addFriendsList = [
     ["Allen Iverson", 25],

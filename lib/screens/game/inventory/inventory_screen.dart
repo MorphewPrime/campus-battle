@@ -77,10 +77,12 @@ class _BodyState extends State<Body> {
               children: [
                 Container(
                   child: InkWell(
+                    //Back button
                     onTap: () {
                       Navigator.pop(context);
                     },
                     child: SizedBox(
+                      //Screen
                       height: 60,
                       width: 60,
                       child: NeuBox(
@@ -96,6 +98,7 @@ class _BodyState extends State<Body> {
                 ),
                 const Expanded(
                   child: Padding(
+                    //Inventory Text
                     padding: EdgeInsets.fromLTRB(0, 0, 60, 0),
                     child: Text(
                       "I N V E N T O R Y",
@@ -108,21 +111,25 @@ class _BodyState extends State<Body> {
             ),
           ),
           Expanded(
+            //Load inventory information
             child: FutureBuilder(
               future: loadItems(),
               builder: (BuildContext context, snapshot) {
                 if (snapshot.hasData) {
+                  //Check connection to database
                   if (snapshot.connectionState == ConnectionState.waiting) {
                     return Center(
                       child: CircularProgressIndicator(),
                     );
                   } else {
+                    //Fetch inventory
                     return Center(
                       child: ListView.builder(
                         itemCount: snapshot.data.docs.length,
                         itemBuilder: (context, index) {
                           DocumentSnapshot document = snapshot.data.docs[index];
                           return UserItemTile(
+                            //Create item display
                             itemName: document['name'],
                             itemQuantity: document['quantity'],
                             itemDesc: document['description'],
@@ -132,6 +139,7 @@ class _BodyState extends State<Body> {
                     );
                   }
                 } else if (snapshot.hasError) {
+                  //Inventory error
                   return Text('no data');
                 }
                 return Center(

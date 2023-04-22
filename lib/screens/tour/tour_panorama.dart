@@ -30,6 +30,7 @@ class Body extends StatefulWidget {
   State<Body> createState() => _BodyState();
 }
 
+// Build the panorama screen
 class _BodyState extends State<Body> {
   double _lon = 0;
   double _lat = 0;
@@ -37,10 +38,12 @@ class _BodyState extends State<Body> {
   int _panoId = 0;
   bool infoWindowOpen = false;
 
+  // Load panorama images
   List<Image> panoImages = [
     Image.asset('assets/images/panoramas/PANO_test.jpg'),
   ];
 
+  // Update display whenever view is moved
   void onViewChanged(longitude, latitude, tilt) {
     setState(() {
       _lon = longitude;
@@ -49,6 +52,7 @@ class _BodyState extends State<Body> {
     });
   }
 
+  // Defines a button that can be used to move images
   Widget hotspotButton(
       {String? text, IconData? icon, VoidCallback? onPressed}) {
     return Column(
@@ -81,6 +85,7 @@ class _BodyState extends State<Body> {
     super.initState();
   }
 
+  // Create the screen view
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -97,6 +102,7 @@ class _BodyState extends State<Body> {
                 infoWindowOpen = false;
               });
             },
+            // move image when screen is pressed
             onLongPressStart: (longitude, latitude, tilt) =>
                 print('onLongPressStart: $longitude, $latitude, $tilt'),
             onLongPressMoveUpdate: (longitude, latitude, tilt) =>
@@ -105,6 +111,7 @@ class _BodyState extends State<Body> {
                 print('onLongPressEnd: $longitude, $latitude, $tilt'),
             child: Image.asset('assets/images/panoramas/PANO_test.jpg'),
             hotspots: [
+              // List of buttons to change view image
               Hotspot(
                 latitude: -15.0,
                 longitude: -129.0,
@@ -135,6 +142,7 @@ class _BodyState extends State<Body> {
             ],
           ),
           Visibility(
+            // info window for tour images
             visible: infoWindowOpen,
             child: Align(
               alignment: Alignment.bottomLeft,
@@ -162,6 +170,7 @@ class _BodyState extends State<Body> {
                             crossAxisAlignment: CrossAxisAlignment.stretch,
                             children: const <Widget>[
                               Text(
+                                //Title text
                                 "Ellooo",
                                 style: TextStyle(
                                     fontSize: 27, fontWeight: FontWeight.bold),
@@ -175,6 +184,7 @@ class _BodyState extends State<Body> {
                               // ),
 
                               Text(
+                                //Body text
                                 "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Egestas tellus rutrum tellus pellentesque eu tincidunt tortor. Interdum velit euismod in pellentesque massa. Quis lectus nulla at volutpat diam ut venenatis. Gravida neque convallis a cras semper. Phasellus vestibulum lorem sed risus ultricies tristique. Amet cursus sit amet dictum sit amet justo. In cursus turpis massa tincidunt dui ut ornare lectus. Ut consequat semper viverra nam. Et pharetra pharetra massa massa ultricies. Orci nulla pellentesque dignissim enim sit amet venenatis urna. Sapien nec sagittis aliquam malesuada bibendum. Pulvinar neque laoreet suspendisse interdum consectetur libero id. Diam ut venenatis tellus in metus vulputate eu scelerisque. Tempus urna et pharetra pharetra. Morbi non arcu risus quis. Laoreet sit amet cursus sit amet dictum. Platea dictumst vestibulum rhoncus est. Arcu odio ut sem nulla pharetra diam. Aliquam faucibus purus in massa tempor nec. Fusce id velit ut tortor pretium. At quis risus sed vulputate odio. Urna condimentum mattis pellentesque id nibh tortor id aliquet. Eget aliquet nibh praesent tristique magna. Et sollicitudin ac orci phasellus egestas. Vitae tortor condimentum lacinia quis vel eros donec. Integer vitae justo eget magna fermentum. Dolor sit amet consectetur adipiscing. Vestibulum lectus mauris ultrices eros in. Fringilla ut morbi tincidunt augue interdum velit. Quam vulputate dignissim suspendisse in est. Sagittis purus sit amet volutpat consequat mauris nunc congue nisi. Odio tempor orci dapibus ultrices in iaculis. Leo urna molestie at elementum eu facilisis sed odio. In ante metus dictum at tempor. Dolor sit amet consectetur adipiscing elit duis tristique sollicitudin. Ullamcorper malesuada proin libero nunc consequat interdum varius sit. Proin libero nunc consequat interdum varius sit amet mattis. Amet commodo nulla facilisi nullam vehicula ipsum a arcu cursus. Morbi quis commodo odio aenean sed.",
                                 style: TextStyle(fontSize: 18),
                               ),
@@ -198,6 +208,7 @@ class _BodyState extends State<Body> {
             ),
           ),
           Visibility(
+            //Button to open info window
             visible: !infoWindowOpen,
             child: Padding(
               padding: EdgeInsets.all(10),

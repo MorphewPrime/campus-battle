@@ -10,6 +10,8 @@ import 'package:campusbattle/screens/welcome/login_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
+// Verifies the login info, and either returns with the main game
+// or returns the user to the login screen to try again
 class Verify extends StatelessWidget {
   const Verify({super.key});
 

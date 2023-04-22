@@ -8,7 +8,6 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
 
-
 //main class for welcome screen
 class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({super.key});
@@ -21,6 +20,7 @@ class WelcomeScreen extends StatelessWidget {
   }
 }
 
+// Defines the body of the screen - cotinued in _BodyState
 class Body extends StatefulWidget {
   const Body({Key? key}) : super(key: key);
 
@@ -28,22 +28,23 @@ class Body extends StatefulWidget {
   State<Body> createState() => _BodyState();
 }
 
+// Defines the body of the screen
 class _BodyState extends State<Body> {
-  
-  @override 
+  @override
   void initState() {
     super.initState();
     //set timer to go to the login screen after a couple seconds
-    Timer(const Duration(seconds:2), () {
+    Timer(const Duration(seconds: 2), () {
       setState(() {
         Navigator.pushNamed(context, '/loginScreen');
       });
     });
   }
 
-
+  // Defines the actual screen
   @override
   Widget build(BuildContext context) {
+    // Load image onto the welcome screen
     return Scaffold(
       backgroundColor: Colors.red,
       body: Stack(

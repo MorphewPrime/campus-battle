@@ -22,6 +22,7 @@ class FriendsScreen extends StatefulWidget {
   State<FriendsScreen> createState() => _FriendsScreenState();
 }
 
+// Test class containing friend data
 class _FriendsScreenState extends State<FriendsScreen> {
   List friendsList = [
     ["Spud Webb", 25],

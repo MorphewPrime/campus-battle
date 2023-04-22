@@ -1,3 +1,10 @@
+/* 
+
+This game was never finished, as we decided to go a different direction
+with the project
+
+*/
+
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:flame/game.dart';
