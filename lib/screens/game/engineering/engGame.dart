@@ -37,7 +37,13 @@ class _MyEngGameState extends State<MyEngGame> {
       _showDialog = false;
       startGame();
     });
-    startGame();
+  }
+
+  int _score = 0;
+  void incrementScore() {
+    setState(() {
+      _score++;
+    });
   }
 
   //initializing variables
@@ -61,12 +67,112 @@ class _MyEngGameState extends State<MyEngGame> {
     target = randomNum.nextInt(400) + 100;
   }
 
+  //enemy missiles
+  // List<int> enemyMissiles = [];
+
   //everything that should happen upon start
+  int counter = 0;
+  Timer? gameTimer;
   void startGame() {
     charPos = 530;
-    const duration = const Duration(milliseconds: 700);
-    Timer.periodic(duration, (timer) {
+    const duration = const Duration(milliseconds: 100);
+    gameTimer = Timer.periodic(duration, (timer) {
       enemyMoves();
+      checkTarget();
+      checkScore();
+      counter++;
+      if (counter == 20) {
+        // Execute the fireMissile function every 5 intervals (500 milliseconds)
+        fireMissile();
+        counter = 0; // Reset the counter after firing the missile
+      }
+    });
+  }
+
+  //enemy fires a missile
+  int enemyMissile = -1;
+  void fireMissile() {
+    enemyMissile = enemyPos;
+    const durationMissile = const Duration(milliseconds: 30);
+    Timer.periodic(durationMissile, (timer) {
+      setState(() {
+        enemyMissile += 20;
+        if (enemyMissile >= numOfSquares) {
+          // enemyMissiles.remove(enemyPos);
+          timer.cancel();
+        } else if (enemyMissile == charPos) {
+          gameTimer?.cancel();
+          youLostPopup();
+          timer.cancel();
+        }
+      });
+    });
+    // enemyMissiles.add(enemyMissile);
+  }
+
+  //check score
+  void checkScore() {
+    if (_score > 4) {
+      gameTimer?.cancel();
+      youWonPopup();
+    }
+  }
+
+  //if game won
+  void youWonPopup() {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Congratulations!'),
+          content: Text('You won the game!'),
+          actions: <Widget>[
+            TextButton(
+              child: Text('Back to Map'),
+              onPressed: () {
+                // Close the dialog and navigate back to the map screen
+                Navigator.of(context).pop();
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  //if hit, game over
+  void youLostPopup() {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Game Over!'),
+          content: Text('You got hit!'),
+          actions: <Widget>[
+            TextButton(
+              child: Text('Back to Map'),
+              onPressed: () {
+                // Close the dialog and navigate back to the map screen
+                Navigator.of(context).pop();
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  //checking if user is on target
+  void checkTarget() {
+    setState(() {
+      if (charPos == target) {
+        generateNewTarget();
+        incrementScore();
+      }
     });
   }
 
@@ -169,7 +275,7 @@ class _MyEngGameState extends State<MyEngGame> {
                       ),
                     );
                   }
-                  if (index == enemyPos) {
+                  if (index == enemyPos || index == enemyMissile) {
                     return Container(
                       padding: EdgeInsets.all(2),
                       child: ClipRRect(
@@ -207,6 +313,22 @@ class _MyEngGameState extends State<MyEngGame> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
+                      Expanded(
+                        child: Padding(
+                          padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
+                          child: SizedBox(
+                            width: 100,
+                            child: Text(
+                              'Score: $_score',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 20.0,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
                       IconButton(
                         onPressed: () {
                           // Handle up arrow button press
@@ -214,6 +336,9 @@ class _MyEngGameState extends State<MyEngGame> {
                         },
                         icon: Icon(Icons.arrow_drop_up),
                         iconSize: 50,
+                      ),
+                      Expanded(
+                        child: SizedBox(width: 100),
                       ),
                     ],
                   ),
